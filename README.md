@@ -1,3 +1,245 @@
-# emote-server
+# emote-server [![Docker Hub build][docker-hub-badge]][docker-hub]
 
 > A simple application to list and serve emotes
+
+This is a small application to serve emotes (or other files) over a simple HTTP
+API.
+
+## Table of contents
+
++ [Install](#install)
+  + [Installing with Docker](#installing-with-docker)
+  + [Installing without Docker](#installing-without-docker)
+  + [Dependencies](#dependencies)
+  + [Updating](#updating)
+    + [Updating with Docker](#updating-with-docker)
+    + [Updating without Docker](#updating-without-docker)
++ [Usage](#usage)
+  + [Running with Docker](#running-with-docker)
+  + [Running without Docker](#running-without-docker)
+  + [Configuration](#configuration)
+  + [API](#api)
+    + [General](#general)
+    + [Routes](#routes)
+      + [Base](#base)
+      + [Emotes](#emotes)
+        + [Listing emotes](#listing-emotes)
+        + [Getting emotes](#getting-emotes)
++ [Maintainer](#maintainer)
++ [Contribute](#contribute)
++ [License](#license)
+
+## Install
+
+The recommended way to run is via [Docker][docker]. Basic instructions on how
+to run without it are also provided.
+
+### Installing with Docker
+
+To use this application with Docker, you can simply pull the prebuilt image
+from [Docker Hub][docker-hub]:
+
+```zsh
+user@local:~$ docker pull mserajnik/emote-server
+```
+
+Alternatively, you can also build the image yourself. The user that is used
+inside the container has UID `1000` and GID `1000` by default. You can adjust
+this (e.g., to match your host UID/GID) by providing the arguments `USER_ID`
+and `GROUP_ID` when making a build.
+
+### Installing without Docker
+
+To install without Docker, you can simply clone the repository and install
+dependencies.
+
+```zsh
+user@local:~$ git clone https://github.com/mserajnik/emote-server.git
+user@local:~$ cd emote-server
+user@local:emote-server$ yarn
+```
+
+### Dependencies
+
++ [Docker][docker] (when using Docker)
++ [Node.js][node-js] (when not using Docker)
++ [Yarn][yarn] (when not using Docker)
+
+This application should work with both the latest LTS and the latest stable
+version of Node.js. If you encounter any issues with either of those versions
+when not using Docker, please [let me know][issues].
+
+### Updating
+
+This application follows [semantic versioning][semantic-versioning] and any
+breaking changes that require additional attention will be released under a new
+major version (e.g., `2.0.0`). Minor version updates (e.g., `1.1.0` or `1.2.0`)
+are therefore always safe to simply install.
+
+When necessary, this section will be expanded with upgrade guides for new major
+versions.
+
+#### Updating with Docker
+
+Simply pull the latest Docker image to update:
+
+```zsh
+user@local:~$ docker pull mserajnik/emote-server
+```
+
+#### Updating without Docker
+
+If you chose not to use Docker, you can update via Git:
+
+```zsh
+user@local:emote-server$ git pull
+user@local:emote-server$ yarn
+```
+
+## Usage
+
+### Running with Docker
+
+To make using Docker as easy as possible, a working
+[Docker Compose][docker-compose] example setup is provided. To get started with
+this example setup, simply duplicate `docker-compose.yml.example` as
+`docker-compose.yml` and adjust the variables in the `environment` section as
+described [here](#configuration).
+
+Finally, start the containers:
+
+```zsh
+user@local:emote-server$ docker-compose up -d
+```
+
+### Running without Docker
+
+To run without Docker, you will first need to duplicate the `.env.example` as
+`.env` and adjust the variables as described [here](#configuration).
+
+After that, you can start the application:
+
+```zsh
+user@local:emote-server$ yarn start
+```
+
+### Configuration
+
+Configuration is done entirely via environment variables. Please pay special
+attention to the instructions to prevent issues.
+
++ `EMOTE_SERVER_PUBLIC_URL=http://localhost:8000`: the public URL the server
+  will use to display file URLs. __No trailings slashes.__
++ `EMOTE_SERVER_PORT=8000`: the port the server is listening on.
++ `EMOTE_SERVER_ACCESS_KEY=`: an arbitrary string used as access key for the
+  server's API. Can be of any (reasonable) length. If left empty, the
+  respective routes will be publicly accessible.
++ `EMOTE_SERVER_NUMBER_OF_WORKERS=`: sets the number of workers. By default,
+  one worker per logical CPU core is used. You might want to decrease or
+  increase that number, depending on your needs/hardware. In general, the more
+  workers are running, the more requests can be handled simultaneously. But
+  note that increasing the number of workers beyond the number of logical CPUs
+  might be detrimental to performance or cause even more serious issues (e.g.,
+  crashes).
++ `EMOTE_SERVER_SUPPORTED_FILE_EXTENSIONS=png,gif`: sets the file extensions
+  for the files the server should serve. The extensions need to be separated
+  with `,`.
++ `EMOTE_SERVER_EMOTES_PATH=./emotes`: the path emotes are served from. Can be
+  relative or absolute.
+
+### API
+
+#### General
+
+Request and response bodies are always in JSON format. The `Authorization`
+header in the format `Authorization: Bearer <EMOTE_SERVER_ACCESS_KEY>` is used
+to authenticate for all routes except the base route (`/`) unless
+`EMOTE_SERVER_ACCESS_KEY` is empty, in which case these routes will be publicly
+accessible as well.
+
+Requests with missing or malformed parameters will be responded with an error
+in the following format and error code `400`:
+
+```json5
+{
+  "error": <field name>
+}
+```
+
+#### Routes
+
+##### Base
+
+Responds with the version number and the API version number of the
+installation. The API version number will increase by 1 every time an existing
+API endpoint is modified in a way it behaves differently than before or
+removed altogether.
+
+__Route:__ `GET /`
+
+__Response on success:__
+
+```json5
+{
+  "emoteServer": {
+    "version": <version number of the application>,
+    "apiVersion>": <API version number of the application>
+  }
+}
+```
+
+##### Emotes
+
+###### Listing emotes
+
+Responds with the list of emotes available to be served.
+
+__Route:__ `GET /emotes`
+
+__Response on success:__
+
+```json5
+{
+  "emotes": [
+    {
+      "name": <name of the emote>,
+      "url": <URL of the emote>
+    }
+    // […]
+  ]
+}
+```
+
+###### Getting emotes
+
+Responds with the requested emote.
+
+__Route:__ `GET /emotes/<emote name>`
+
+__Output on success:__ The requested emote
+
+## Maintainer
+
+[mserajnik][maintainer]
+
+## Contribute
+
+You are welcome to help out!
+
+[Open an issue][issues] or submit a pull request.
+
+## License
+
+[AGPLv3](LICENSE) © Michael Serajnik
+
+[docker]: https://www.docker.com/
+[docker-hub]: https://hub.docker.com/r/mserajnik/emote-server/
+[node-js]: https://nodejs.org/en/
+[yarn]: https://yarnpkg.com/
+[semantic-versioning]: https://semver.org/
+[docker-compose]: https://docs.docker.com/compose/
+
+[docker-hub-badge]: https://img.shields.io/docker/cloud/automated/mserajnik/emote-server.svg
+
+[maintainer]: https://github.com/mserajnik
+[issues]: https://github.com/mserajnik/emote-server/issues/new
