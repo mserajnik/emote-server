@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Fixed
+
++ Fixed wrong service name in example Docker Compose configuration
+
 ## 1.0.0 - 2020-01-19
 
 ### Added

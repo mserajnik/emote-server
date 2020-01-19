@@ -2,7 +2,7 @@ version: '3'
 
 services:
 
-  hex:
+  emote-server:
     image: mserajnik/emote-server:latest
     restart: unless-stopped
     ports:
