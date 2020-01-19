@@ -1,6 +1,6 @@
 {
   "name": "emote-server",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A simple application to list and serve emotes",
   "keywords": [
     "emotes"
