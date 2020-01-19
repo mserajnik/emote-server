@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Fixed
+
++ Fixed version numbers
+
 ## [1.0.1] - 2020-01-19
 
 ### Fixed
