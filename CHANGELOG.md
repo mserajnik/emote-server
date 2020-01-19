@@ -8,10 +8,17 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.0.1] - 2020-01-19
+
+### Fixed
+
++ Fixed wrong service name in example Docker Compose configuration
+
 ## 1.0.0 - 2020-01-19
 
 ### Added
 
 + Initial release
 
-[Unreleased]: https://github.com/mserajnik/emote-server/compare/1.0.0...develop
+[Unreleased]: https://github.com/mserajnik/emote-server/compare/1.0.1...develop
+[1.0.1]: https://github.com/mserajnik/emote-server/compare/1.0.0...1.0.1
