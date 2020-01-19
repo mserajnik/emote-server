@@ -8,6 +8,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.0.2] - 2020-01-19
+
+### Fixed
+
++ Fixed version numbers
+
 ## [1.0.1] - 2020-01-19
 
 ### Fixed
@@ -20,5 +26,6 @@ and this project adheres to
 
 + Initial release
 
-[Unreleased]: https://github.com/mserajnik/emote-server/compare/1.0.1...develop
+[Unreleased]: https://github.com/mserajnik/emote-server/compare/1.0.2...develop
+[1.0.2]: https://github.com/mserajnik/emote-server/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/mserajnik/emote-server/compare/1.0.0...1.0.1
