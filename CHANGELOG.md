@@ -8,6 +8,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
++ Added the ability to use a `accessKey=<EMOTE_SERVER_ACCESS_KEY>` query
+  parameter instead of the `Authorization: Bearer <EMOTE_SERVER_ACCESS_KEY>`
+  header for authentication to make hotlinking emotes in `<img>` tags possible
+
 ## [1.0.2] - 2020-01-19
 
 ### Fixed

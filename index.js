@@ -19,6 +19,7 @@
  */
 
 const bodyParser = require('body-parser')
+const queryParser = require('connect-query')
 const service = require('restana')()
 const send = require('send')
 
@@ -29,6 +30,7 @@ const schemas = require('./src/util/schemas')
 const emotes = require('./src/util/emotes')
 
 service.use(bodyParser.json())
+service.use(queryParser())
 
 service.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -60,7 +62,8 @@ service.get('/emotes', async (req, res) => {
   if (config.accessKey !== '') {
     try {
       await schemas.emotes.validateAsync({
-        accessKey: req.headers.authorization
+        accessKey: req.headers.authorization ||
+          req.query.accessKey ? `Bearer ${req.query.accessKey}` : null
       })
     } catch (err) {
       return res.send({
@@ -76,7 +79,8 @@ service.get('/emotes/:emote', async (req, res) => {
   if (config.accessKey !== '') {
     try {
       await schemas.emotes.validateAsync({
-        accessKey: req.headers.authorization
+        accessKey: req.headers.authorization ||
+          req.query.accessKey ? `Bearer ${req.query.accessKey}` : null
       })
     } catch (err) {
       return res.send({
