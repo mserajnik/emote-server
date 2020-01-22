@@ -8,6 +8,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.1.0] - 2020-01-22
+
 ### Added
 
 + Added the ability to use a `accessKey=<EMOTE_SERVER_ACCESS_KEY>` query
@@ -36,6 +38,7 @@ and this project adheres to
 
 + Initial release
 
-[Unreleased]: https://github.com/mserajnik/emote-server/compare/1.0.2...develop
+[Unreleased]: https://github.com/mserajnik/emote-server/compare/1.1.0...develop
+[1.1.0]: https://github.com/mserajnik/emote-server/compare/1.0.2...1.1.0
 [1.0.2]: https://github.com/mserajnik/emote-server/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/mserajnik/emote-server/compare/1.0.0...1.0.1
