@@ -152,10 +152,10 @@ attention to the instructions to prevent issues.
 #### General
 
 Request and response bodies are always in JSON format. The `Authorization`
-header in the format `Authorization: Bearer <EMOTE_SERVER_ACCESS_KEY>` is used
-to authenticate for all routes except the base route (`/`) unless
-`EMOTE_SERVER_ACCESS_KEY` is empty, in which case these routes will be publicly
-accessible as well.
+header in the format `Authorization: Bearer <EMOTE_SERVER_ACCESS_KEY>` or the
+query parameter `accessKey=<EMOTE_SERVER_ACCESS_KEY>` is used to authenticate
+for all routes except the base route (`/`) unless `EMOTE_SERVER_ACCESS_KEY` is
+empty, in which case these routes will be publicly accessible as well.
 
 Requests with missing or malformed parameters will be responded with an error
 in the following format and error code `400`:
