@@ -14,6 +14,10 @@ and this project adheres to
   parameter instead of the `Authorization: Bearer <EMOTE_SERVER_ACCESS_KEY>`
   header for authentication to make hotlinking emotes in `<img>` tags possible
 
+### Changed
+
++ Updated dependencies
+
 ## [1.0.2] - 2020-01-19
 
 ### Fixed
