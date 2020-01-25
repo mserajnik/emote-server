@@ -20,6 +20,7 @@
 
 const bodyParser = require('body-parser')
 const queryParser = require('connect-query')
+const fileUpload = require('express-fileupload')
 const service = require('restana')()
 const send = require('send')
 
@@ -30,6 +31,12 @@ const schemas = require('./src/util/schemas')
 const emotes = require('./src/util/emotes')
 
 service.use(bodyParser.json())
+service.use(fileUpload({
+  safeFileNames: true,
+  preserveExtension: Math.max(...config.supportedFileExtensions.split(',').map(
+    extension => extension.length
+  ))
+}))
 service.use(queryParser())
 
 service.use((req, res, next) => {
@@ -39,7 +46,7 @@ service.use((req, res, next) => {
     'Accept, Authorization, Content-Type, Origin, X-Requested-With'
   )
   res.setHeader(
-    'Access-Control-Allow-Methods', 'GET, HEAD, POST, OPTIONS'
+    'Access-Control-Allow-Methods', 'GET, HEAD, POST, DELETE, OPTIONS'
   )
 
   if (req.method === 'OPTIONS') {
@@ -63,16 +70,54 @@ service.get('/emotes', async (req, res) => {
     try {
       await schemas.emotes.validateAsync({
         accessKey: req.headers.authorization ||
-          req.query.accessKey ? `Bearer ${req.query.accessKey}` : null
+          (req.query.accessKey ? `Bearer ${req.query.accessKey}` : null)
       })
     } catch (err) {
       return res.send({
-        error: `${err.details[0].path[0]}`
-      }, 400)
+        success: false,
+        error: 'AccessKeyError'
+      }, 401)
     }
   }
 
-  res.send(await emotes.list())
+  const listResponse = await emotes.list()
+
+  res.send({
+    success: listResponse.success,
+    [listResponse.success ? 'emotes' : 'message']: listResponse.success
+      ? listResponse.emotes
+      : listResponse.message
+  }, listResponse.status)
+})
+
+service.post('/emotes', async (req, res) => {
+  if (config.accessKey !== '') {
+    try {
+      await schemas.emotes.validateAsync({
+        accessKey: req.headers.authorization ||
+          (req.query.accessKey ? `Bearer ${req.query.accessKey}` : null)
+      })
+    } catch (err) {
+      return res.send({
+        success: false,
+        error: 'AccessKeyError'
+      }, 401)
+    }
+  }
+
+  if (!req.files && req.files.emote) {
+    return res.send({
+      success: false,
+      message: 'AddError'
+    }, 400)
+  }
+
+  const addResponse = await emotes.add(req.files.emote)
+
+  res.send({
+    success: addResponse.success,
+    message: addResponse.message
+  }, addResponse.code)
 })
 
 service.get('/emotes/:emote', async (req, res) => {
@@ -80,18 +125,42 @@ service.get('/emotes/:emote', async (req, res) => {
     try {
       await schemas.emotes.validateAsync({
         accessKey: req.headers.authorization ||
-          req.query.accessKey ? `Bearer ${req.query.accessKey}` : null
+          (req.query.accessKey ? `Bearer ${req.query.accessKey}` : null)
       })
     } catch (err) {
       return res.send({
-        error: `${err.details[0].path[0]}`
-      }, 400)
+        success: false,
+        error: 'AccessKeyError'
+      }, 401)
     }
   }
 
   send(req, `${config.emotesPath}/${req.params.emote}`)
-    .on('error', () => res.send({ error: 'fileNotFound' }, 404))
+    .on('error', () => res.send({ error: 'GetError' }, 404))
     .pipe(res)
+})
+
+service.delete('/emotes/:emote', async (req, res) => {
+  if (config.accessKey !== '') {
+    try {
+      await schemas.emotes.validateAsync({
+        accessKey: req.headers.authorization ||
+          (req.query.accessKey ? `Bearer ${req.query.accessKey}` : null)
+      })
+    } catch (err) {
+      return res.send({
+        success: false,
+        error: 'AccessKeyError'
+      }, 401)
+    }
+  }
+
+  const deleteResponse = await emotes.delete(req.params.emote)
+
+  res.send({
+    success: deleteResponse.success,
+    message: deleteResponse.message
+  }, deleteResponse.code)
 })
 
 module.exports = service

@@ -8,6 +8,19 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
++ Added the ability to add and delete emotes via API
+
+### Changed
+
++ Normalized the API
+
+### Fixed
+
++ Fixed the regression causing
+  `Authorization: Bearer <EMOTE_SERVER_ACCESS_KEY>` not to work anymore
+
 ## [1.1.0] - 2020-01-22
 
 ### Added
