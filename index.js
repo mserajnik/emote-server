@@ -57,7 +57,10 @@ service.use((req, res, next) => {
 })
 
 service.get('/', async (req, res) => {
-  if (config.accessKey !== '') {
+  if (
+    (req.headers.authorization || req.query.accessKey) &&
+    config.accessKey !== ''
+  ) {
     try {
       await schemas.emotes.validateAsync({
         accessKey: req.headers.authorization ||

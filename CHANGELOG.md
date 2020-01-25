@@ -8,6 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
++ Reverted the base route requiring authentication; instead it can now
+  _optionally_ be used to authenticate access keys by passing them (in which
+  case it will either respond normally when using a valid access key or with an
+  `AccessKeyError` when using an invalid one)
+
 ## [1.3.0] - 2020-01-25
 
 ### Changed
