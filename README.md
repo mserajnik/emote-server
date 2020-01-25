@@ -154,11 +154,11 @@ attention to the instructions to prevent issues.
 #### General
 
 Request and response bodies are always in JSON format (except when uploading
-emotes). The Authorization header in the format
+or downloading the actual files). The Authorization header in the format
 `Authorization: Bearer <EMOTE_SERVER_ACCESS_KEY>` or the query parameter
 `accessKey=<EMOTE_SERVER_ACCESS_KEY>` is used to authenticate for all routes
-except the base route (`/`) unless `EMOTE_SERVER_ACCESS_KEY` is empty, in which
-case these routes will be publicly accessible as well.
+unless `EMOTE_SERVER_ACCESS_KEY` is empty, in which case these routes will be
+publicly accessible as well.
 
 In case of any occuring errors, the response will have the following format
 and an appropriate HTTP status code:
@@ -187,10 +187,14 @@ __Response on success:__
 {
   "emoteServer": {
     "version": <version number of the application>,
-    "apiVersion>": <API version number of the application>
+    "apiVersion": <API version number of the application>
   }
 }
 ```
+
+__Possible errors:__
+
++ `AccessKeyError`
 
 ##### Emotes
 
@@ -213,6 +217,7 @@ __Response on success:__
 
 __Possible errors:__
 
++ `AccessKeyError`
 + `AddError`
 
 ###### Deleting emotes
@@ -233,6 +238,7 @@ __Response on success:__
 
 __Possible errors:__
 
++ `AccessKeyError`
 + `DeleteError`
 
 ###### Listing emotes
@@ -258,6 +264,7 @@ __Response on success:__
 
 __Possible errors:__
 
++ `AccessKeyError`
 + `ListError`
 
 ###### Getting emotes
@@ -270,6 +277,7 @@ __Output on success:__ The requested emote
 
 __Possible errors:__
 
++ `AccessKeyError`
 + `GetError`
 
 ## Maintainer

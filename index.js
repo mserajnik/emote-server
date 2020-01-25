@@ -56,7 +56,21 @@ service.use((req, res, next) => {
   next()
 })
 
-service.get('/', (req, res) => {
+service.get('/', async (req, res) => {
+  if (config.accessKey !== '') {
+    try {
+      await schemas.emotes.validateAsync({
+        accessKey: req.headers.authorization ||
+          (req.query.accessKey ? `Bearer ${req.query.accessKey}` : null)
+      })
+    } catch (err) {
+      return res.send({
+        success: false,
+        error: 'AccessKeyError'
+      }, 401)
+    }
+  }
+
   res.send({
     emoteServer: {
       version: config.version,
