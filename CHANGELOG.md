@@ -11,6 +11,7 @@ and this project adheres to
 ### Changed
 
 + Made the base route require authentication
++ Updated dependencies
 
 ## [1.2.0] - 2020-01-25
 
