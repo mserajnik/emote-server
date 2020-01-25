@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
++ Made the base route require authentication
+
 ## [1.2.0] - 2020-01-25
 
 ### Added

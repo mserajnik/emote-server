@@ -8,7 +8,7 @@ if (emotesPath.startsWith('.')) {
 
 module.exports = {
   version: '1.2.0',
-  apiVersion: 2,
+  apiVersion: 3,
   publicUrl: process.env.EMOTE_SERVER_PUBLIC_URL || 'http://localhost',
   port: process.env.EMOTE_SERVER_PORT || 8000,
   numberOfWorkers:
