@@ -8,6 +8,21 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.2.0] - 2020-01-25
+
+### Added
+
++ Added the ability to add and delete emotes via API
+
+### Changed
+
++ Normalized the API
+
+### Fixed
+
++ Fixed the regression causing
+  `Authorization: Bearer <EMOTE_SERVER_ACCESS_KEY>` not to work anymore
+
 ## [1.1.0] - 2020-01-22
 
 ### Added
@@ -38,7 +53,8 @@ and this project adheres to
 
 + Initial release
 
-[Unreleased]: https://github.com/mserajnik/emote-server/compare/1.1.0...develop
+[Unreleased]: https://github.com/mserajnik/emote-server/compare/1.2.0...develop
+[1.2.0]: https://github.com/mserajnik/emote-server/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/mserajnik/emote-server/compare/1.0.2...1.1.0
 [1.0.2]: https://github.com/mserajnik/emote-server/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/mserajnik/emote-server/compare/1.0.0...1.0.1

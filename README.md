@@ -23,6 +23,8 @@ API.
     + [Routes](#routes)
       + [Base](#base)
       + [Emotes](#emotes)
+        + [Adding emotes](#adding-emotes)
+        + [Deleting emotes](#deleting-emotes)
         + [Listing emotes](#listing-emotes)
         + [Getting emotes](#getting-emotes)
 + [Maintainer](#maintainer)
@@ -151,18 +153,20 @@ attention to the instructions to prevent issues.
 
 #### General
 
-Request and response bodies are always in JSON format. The `Authorization`
-header in the format `Authorization: Bearer <EMOTE_SERVER_ACCESS_KEY>` or the
-query parameter `accessKey=<EMOTE_SERVER_ACCESS_KEY>` is used to authenticate
-for all routes except the base route (`/`) unless `EMOTE_SERVER_ACCESS_KEY` is
-empty, in which case these routes will be publicly accessible as well.
+Request and response bodies are always in JSON format (except when uploading
+emotes). The Authorization header in the format
+`Authorization: Bearer <EMOTE_SERVER_ACCESS_KEY>` or the query parameter
+`accessKey=<EMOTE_SERVER_ACCESS_KEY>` is used to authenticate for all routes
+except the base route (`/`) unless `EMOTE_SERVER_ACCESS_KEY` is empty, in which
+case these routes will be publicly accessible as well.
 
-Requests with missing or malformed parameters will be responded with an error
-in the following format and error code `400`:
+In case of any occuring errors, the response will have the following format
+and an appropriate HTTP status code:
 
 ```json5
 {
-  "error": <field name>
+  "success": false,
+  "error": <error name>
 }
 ```
 
@@ -190,6 +194,47 @@ __Response on success:__
 
 ##### Emotes
 
+###### Adding emotes
+
+Adds a new emote. If a file with the same name already exists it will be
+overwritten. The request has to be of type `multipart-form-data` and the file
+needs to have the key `emote`.
+
+__Route:__ `POST /emotes`
+
+__Response on success:__
+
+```json5
+{
+  "success": true,
+  "message": "Add"
+}
+```
+
+__Possible errors:__
+
++ `AddError`
+
+###### Deleting emotes
+
+Deletes the emote with the given filename. If the file does not exist, it will
+respond with an error.
+
+__Route:__ `DELETE /emotes/<emote filename>`
+
+__Response on success:__
+
+```json5
+{
+  "success": true,
+  "message": "Delete"
+}
+```
+
+__Possible errors:__
+
++ `DeleteError`
+
 ###### Listing emotes
 
 Responds with the list of emotes available to be served.
@@ -200,6 +245,7 @@ __Response on success:__
 
 ```json5
 {
+  "success": true,
   "emotes": [
     {
       "name": <name of the emote>,
@@ -210,13 +256,21 @@ __Response on success:__
 }
 ```
 
+__Possible errors:__
+
++ `ListError`
+
 ###### Getting emotes
 
 Responds with the requested emote.
 
-__Route:__ `GET /emotes/<emote name>`
+__Route:__ `GET /emotes/<emote filename>`
 
 __Output on success:__ The requested emote
+
+__Possible errors:__
+
++ `GetError`
 
 ## Maintainer
 
