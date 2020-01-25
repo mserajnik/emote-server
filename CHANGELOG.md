@@ -8,6 +8,15 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.4.0] - 2020-01-25
+
+### Changed
+
++ Reverted the base route requiring authentication; instead it can now
+  _optionally_ be used to authenticate access keys by passing them (in which
+  case it will either respond normally when using a valid access key or with an
+  `AccessKeyError` when using an invalid one)
+
 ## [1.3.0] - 2020-01-25
 
 ### Changed
@@ -60,7 +69,8 @@ and this project adheres to
 
 + Initial release
 
-[Unreleased]: https://github.com/mserajnik/emote-server/compare/1.3.0...develop
+[Unreleased]: https://github.com/mserajnik/emote-server/compare/1.4.0...develop
+[1.4.0]: https://github.com/mserajnik/emote-server/compare/1.3.0...1.4.0
 [1.3.0]: https://github.com/mserajnik/emote-server/compare/1.2.0...1.3.0
 [1.2.0]: https://github.com/mserajnik/emote-server/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/mserajnik/emote-server/compare/1.0.2...1.1.0

@@ -160,6 +160,11 @@ or downloading the actual files). The Authorization header in the format
 unless `EMOTE_SERVER_ACCESS_KEY` is empty, in which case these routes will be
 publicly accessible as well.
 
+The base route (`GET /`) does not require authentication, but can _optionally_
+be used to verify access keys. To do this, simply pass an access key as you
+normally would, in which case it will either respond normally when using a
+valid access key or with an `AccessKeyError` when using an invalid one.
+
 In case of any occuring errors, the response will have the following format
 and an appropriate HTTP status code:
 
