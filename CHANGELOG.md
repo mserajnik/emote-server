@@ -69,10 +69,10 @@ and this project adheres to
 
 + Initial release
 
-[Unreleased]: https://github.com/mserajnik/emote-server/compare/1.4.0...develop
-[1.4.0]: https://github.com/mserajnik/emote-server/compare/1.3.0...1.4.0
-[1.3.0]: https://github.com/mserajnik/emote-server/compare/1.2.0...1.3.0
-[1.2.0]: https://github.com/mserajnik/emote-server/compare/1.1.0...1.2.0
-[1.1.0]: https://github.com/mserajnik/emote-server/compare/1.0.2...1.1.0
-[1.0.2]: https://github.com/mserajnik/emote-server/compare/1.0.1...1.0.2
-[1.0.1]: https://github.com/mserajnik/emote-server/compare/1.0.0...1.0.1
+[Unreleased]: https://github.com/imtbl/emote-server/compare/1.4.0...develop
+[1.4.0]: https://github.com/imtbl/emote-server/compare/1.3.0...1.4.0
+[1.3.0]: https://github.com/imtbl/emote-server/compare/1.2.0...1.3.0
+[1.2.0]: https://github.com/imtbl/emote-server/compare/1.1.0...1.2.0
+[1.1.0]: https://github.com/imtbl/emote-server/compare/1.0.2...1.1.0
+[1.0.2]: https://github.com/imtbl/emote-server/compare/1.0.1...1.0.2
+[1.0.1]: https://github.com/imtbl/emote-server/compare/1.0.0...1.0.1

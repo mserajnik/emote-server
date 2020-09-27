@@ -5,12 +5,12 @@
   "keywords": [
     "emotes"
   ],
-  "author": "Michael Serajnik <ms@mserajnik.at>",
+  "author": "imtbl <imtbl@mser.at>",
   "license": "AGPL-3.0-or-later",
   "private": true,
-  "repository": "https://mserajnik@github.com/mserajnik/emote-server.git",
+  "repository": "https://imtbl@github.com/imtbl/emote-server.git",
   "bugs": {
-    "url": "https://github.com/mserajnik/emote-server/issues"
+    "url": "https://github.com/imtbl/emote-server/issues"
   },
   "scripts": {
     "start": "node ./bin/www"
