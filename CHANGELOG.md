@@ -8,6 +8,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.5.1] - 2020-09-27
+
+### Fixed
+
++ Fixed `joi` import
+
 ## [1.5.0] - 2020-09-27
 
 ### Changed
@@ -75,7 +81,8 @@ and this project adheres to
 
 + Initial release
 
-[Unreleased]: https://github.com/imtbl/emote-server/compare/1.5.0...develop
+[Unreleased]: https://github.com/imtbl/emote-server/compare/1.5.1...develop
+[1.5.1]: https://github.com/imtbl/emote-server/compare/1.5.0...1.5.1
 [1.5.0]: https://github.com/imtbl/emote-server/compare/1.4.0...1.5.0
 [1.4.0]: https://github.com/imtbl/emote-server/compare/1.3.0...1.4.0
 [1.3.0]: https://github.com/imtbl/emote-server/compare/1.2.0...1.3.0
