@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
++ Maintenance release, no feature changes
+
 ## [1.4.0] - 2020-01-25
 
 ### Changed
