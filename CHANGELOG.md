@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Fixed
+
++ Fixed `joi` import
+
 ## [1.5.0] - 2020-09-27
 
 ### Changed
