@@ -42,7 +42,7 @@ To use this application with Docker, you can simply pull the prebuilt image
 from [Docker Hub][docker-hub]:
 
 ```zsh
-user@local:~$ docker pull mserajnik/emote-server
+user@local:~$ docker pull mtbl/emote-server
 ```
 
 Alternatively, you can also build the image yourself. The user that is used
@@ -56,7 +56,7 @@ To install without Docker, you can simply clone the repository and install
 dependencies.
 
 ```zsh
-user@local:~$ git clone https://github.com/mserajnik/emote-server.git
+user@local:~$ git clone https://github.com/imtbl/emote-server.git
 user@local:~$ cd emote-server
 user@local:emote-server$ yarn
 ```
@@ -86,7 +86,7 @@ versions.
 Simply pull the latest Docker image to update:
 
 ```zsh
-user@local:~$ docker pull mserajnik/emote-server
+user@local:~$ docker pull mtbl/emote-server
 ```
 
 #### Updating without Docker
@@ -287,7 +287,7 @@ __Possible errors:__
 
 ## Maintainer
 
-[mserajnik][maintainer]
+[imtbl][maintainer]
 
 ## Contribute
 
@@ -297,16 +297,16 @@ You are welcome to help out!
 
 ## License
 
-[AGPLv3](LICENSE) © Michael Serajnik
+[AGPLv3](LICENSE) © imtbl
 
 [docker]: https://www.docker.com/
-[docker-hub]: https://hub.docker.com/r/mserajnik/emote-server/
+[docker-hub]: https://hub.docker.com/r/mtbl/emote-server/
 [node-js]: https://nodejs.org/en/
 [yarn]: https://yarnpkg.com/
 [semantic-versioning]: https://semver.org/
 [docker-compose]: https://docs.docker.com/compose/
 
-[docker-hub-badge]: https://img.shields.io/docker/cloud/automated/mserajnik/emote-server.svg
+[docker-hub-badge]: https://img.shields.io/docker/cloud/automated/mtbl/emote-server.svg
 
-[maintainer]: https://github.com/mserajnik
-[issues]: https://github.com/mserajnik/emote-server/issues/new
+[maintainer]: https://github.com/imtbl
+[issues]: https://github.com/imtbl/emote-server/issues/new

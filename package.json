@@ -1,38 +1,38 @@
 {
   "name": "emote-server",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "A simple application to list and serve emotes",
   "keywords": [
     "emotes"
   ],
-  "author": "Michael Serajnik <ms@mserajnik.at>",
+  "author": "imtbl <imtbl@mser.at>",
   "license": "AGPL-3.0-or-later",
   "private": true,
-  "repository": "https://mserajnik@github.com/mserajnik/emote-server.git",
+  "repository": "https://imtbl@github.com/imtbl/emote-server.git",
   "bugs": {
-    "url": "https://github.com/mserajnik/emote-server/issues"
+    "url": "https://github.com/imtbl/emote-server/issues"
   },
   "scripts": {
     "start": "node ./bin/www"
   },
   "engines": {
-    "node": ">=12.0.0 <14.0.0"
+    "node": ">=12.0.0 <15.0.0"
   },
   "dependencies": {
-    "@hapi/joi": "^17.1.0",
     "body-parser": "^1.19.0",
     "connect-query": "^1.0.0",
     "dotenv": "^8.2.0",
-    "express-fileupload": "^1.1.6",
-    "fast-glob": "^3.1.1",
-    "restana": "^4.0.7",
+    "express-fileupload": "^1.2.0",
+    "fast-glob": "^3.2.4",
+    "joi": "^17.2.1",
+    "restana": "^4.7.4",
     "send": "^0.17.1"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.20.0",
-    "eslint-plugin-node": "^11.0.0",
+    "eslint": "^7.10.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1"
   }
