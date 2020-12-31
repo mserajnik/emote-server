@@ -66,7 +66,7 @@ service.get('/', async (req, res) => {
         accessKey: req.headers.authorization ||
           (req.query.accessKey ? `Bearer ${req.query.accessKey}` : null)
       })
-    } catch (err) {
+    } catch {
       return res.send({
         success: false,
         error: 'AccessKeyError'
@@ -89,7 +89,7 @@ service.get('/emotes', async (req, res) => {
         accessKey: req.headers.authorization ||
           (req.query.accessKey ? `Bearer ${req.query.accessKey}` : null)
       })
-    } catch (err) {
+    } catch {
       return res.send({
         success: false,
         error: 'AccessKeyError'
@@ -101,10 +101,10 @@ service.get('/emotes', async (req, res) => {
 
   res.send({
     success: listResponse.success,
-    [listResponse.success ? 'emotes' : 'message']: listResponse.success
+    [listResponse.success ? 'emotes' : 'error']: listResponse.success
       ? listResponse.emotes
       : listResponse.message
-  }, listResponse.status)
+  }, listResponse.code)
 })
 
 service.post('/emotes', async (req, res) => {
@@ -114,7 +114,7 @@ service.post('/emotes', async (req, res) => {
         accessKey: req.headers.authorization ||
           (req.query.accessKey ? `Bearer ${req.query.accessKey}` : null)
       })
-    } catch (err) {
+    } catch {
       return res.send({
         success: false,
         error: 'AccessKeyError'
@@ -125,7 +125,7 @@ service.post('/emotes', async (req, res) => {
   if (!req.files && req.files.emote) {
     return res.send({
       success: false,
-      message: 'AddError'
+      error: 'AddError'
     }, 400)
   }
 
@@ -133,7 +133,7 @@ service.post('/emotes', async (req, res) => {
 
   res.send({
     success: addResponse.success,
-    message: addResponse.message
+    [addResponse.success ? 'message' : 'error']: addResponse.message
   }, addResponse.code)
 })
 
@@ -144,7 +144,7 @@ service.get('/emotes/:emote', async (req, res) => {
         accessKey: req.headers.authorization ||
           (req.query.accessKey ? `Bearer ${req.query.accessKey}` : null)
       })
-    } catch (err) {
+    } catch {
       return res.send({
         success: false,
         error: 'AccessKeyError'
@@ -153,7 +153,7 @@ service.get('/emotes/:emote', async (req, res) => {
   }
 
   send(req, `${config.emotesPath}/${req.params.emote}`)
-    .on('error', () => res.send({ error: 'GetError' }, 404))
+    .on('error', () => res.send({ success: false, error: 'GetError' }, 404))
     .pipe(res)
 })
 
@@ -164,7 +164,7 @@ service.delete('/emotes/:emote', async (req, res) => {
         accessKey: req.headers.authorization ||
           (req.query.accessKey ? `Bearer ${req.query.accessKey}` : null)
       })
-    } catch (err) {
+    } catch {
       return res.send({
         success: false,
         error: 'AccessKeyError'
@@ -176,8 +176,42 @@ service.delete('/emotes/:emote', async (req, res) => {
 
   res.send({
     success: deleteResponse.success,
-    message: deleteResponse.message
+    [deleteResponse.success ? 'message' : 'error']: deleteResponse.message
   }, deleteResponse.code)
+})
+
+service.get('/frozen-emotes/:emote', async (req, res) => {
+  if (config.accessKey !== '') {
+    try {
+      await schemas.emotes.validateAsync({
+        accessKey: req.headers.authorization ||
+          (req.query.accessKey ? `Bearer ${req.query.accessKey}` : null)
+      })
+    } catch {
+      return res.send({
+        success: false,
+        error: 'AccessKeyError'
+      }, 401)
+    }
+  }
+
+  if (!await emotes.isGifEmote(req.params.emote)) {
+    return res.send({
+      success: false,
+      error: 'GetError'
+    }, 404)
+  }
+
+  if (!await emotes.ensureFrozenEmoteExists(req.params.emote)) {
+    return res.send({
+      success: false,
+      error: 'GenerationError'
+    }, 500)
+  }
+
+  send(req, `${config.frozenEmotesPath}/${req.params.emote}.png`)
+    .on('error', () => res.send({ success: false, error: 'GetError' }, 404))
+    .pipe(res)
 })
 
 module.exports = service

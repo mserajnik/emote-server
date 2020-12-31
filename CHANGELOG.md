@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
++ Add support for generating and serving "frozen" GIF emotes
+
 ## [1.5.1] - 2020-09-27
 
 ### Fixed

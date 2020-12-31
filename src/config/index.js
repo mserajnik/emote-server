@@ -6,6 +6,12 @@ if (emotesPath.startsWith('.')) {
   emotesPath = path.resolve(__dirname, '../..', emotesPath)
 }
 
+let frozenEmotesPath = process.env.EMOTE_SERVER_FROZEN_EMOTES_PATH
+
+if (frozenEmotesPath.startsWith('.')) {
+  frozenEmotesPath = path.resolve(__dirname, '../..', frozenEmotesPath)
+}
+
 module.exports = {
   version: '1.5.1',
   apiVersion: 4,
@@ -16,5 +22,7 @@ module.exports = {
   accessKey: process.env.EMOTE_SERVER_ACCESS_KEY,
   supportedFileExtensions:
     process.env.EMOTE_SERVER_SUPPORTED_FILE_EXTENSIONS || 'png,gif',
-  emotesPath: emotesPath
+  emotesPath: emotesPath || path.resolve(__dirname, '../..', './emotes'),
+  frozenEmotesPath:
+    frozenEmotesPath || path.resolve(__dirname, '../..', './frozen-emotes')
 }
