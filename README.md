@@ -27,6 +27,7 @@ API.
         + [Deleting emotes](#deleting-emotes)
         + [Listing emotes](#listing-emotes)
         + [Getting emotes](#getting-emotes)
+        + [Getting frozen GIF emotes](#getting-frozen-gif-emotes)
 + [Maintainer](#maintainer)
 + [Contribute](#contribute)
 + [License](#license)
@@ -284,6 +285,21 @@ __Possible errors:__
 
 + `AccessKeyError`
 + `GetError`
+
+###### Getting frozen GIF emotes
+
+Responds with a "frozen" PNG version (containing the first frame) of the
+requested GIF emote.
+
+__Route:__ `GET /frozen-emotes/<GIF emote filename>`
+
+__Output on success:__ The requested frozen GIF emote
+
+__Possible errors:__
+
++ `AccessKeyError`
++ `GetError`
++ `GenerationError`
 
 ## Maintainer
 

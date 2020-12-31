@@ -8,7 +8,8 @@ services:
     ports:
       - '8000:8000'
     volumes:
-      - ./emotes:/data
+      - ./data/emotes:/data/emotes
+      - ./data/frozen-emotes:/data/frozen-emotes
     environment:
       - TZ=Etc/UTC
       - EMOTE_SERVER_PUBLIC_URL=http://localhost:8000
@@ -16,4 +17,5 @@ services:
       - EMOTE_SERVER_ACCESS_KEY=
       - EMOTE_SERVER_NUMBER_OF_WORKERS=
       - EMOTE_SERVER_SUPPORTED_FILE_EXTENSIONS=png,gif
-      - EMOTE_SERVER_EMOTES_PATH=/data
+      - EMOTE_SERVER_EMOTES_PATH=/data/emotes
+      - EMOTE_SERVER_FROZEN_EMOTES_PATH=/data/frozen-emotes
