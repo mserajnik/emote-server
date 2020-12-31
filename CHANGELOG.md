@@ -8,6 +8,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.6.0] - 2020-12-31
+
 ### Added
 
 + Add support for generating and serving "frozen" GIF emotes
@@ -85,7 +87,8 @@ and this project adheres to
 
 + Initial release
 
-[Unreleased]: https://github.com/imtbl/emote-server/compare/1.5.1...develop
+[Unreleased]: https://github.com/imtbl/emote-server/compare/1.6.0...develop
+[1.6.0]: https://github.com/imtbl/emote-server/compare/1.5.1...1.6.0
 [1.5.1]: https://github.com/imtbl/emote-server/compare/1.5.0...1.5.1
 [1.5.0]: https://github.com/imtbl/emote-server/compare/1.4.0...1.5.0
 [1.4.0]: https://github.com/imtbl/emote-server/compare/1.3.0...1.4.0
