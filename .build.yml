@@ -1,22 +1,26 @@
-image: alpine/edge
+image: alpine/latest
 packages:
   - docker
   - nodejs
 sources:
   - https://git.sr.ht/~mser/emote-server
+environment:
+  project: emote-server
+  docker_image: mserajnik/emote-server
+  docker_username: mserajnik
 secrets:
-  - ceec741f-3de6-4940-980b-4ffda7fdf12d
+  - 2be455df-9ff9-4803-bf5e-2c65d9d986a5
 tasks:
+  - skip_if_not_release: |
+      cd $project
+      git describe --exact-match HEAD || complete-build
   - setup: |
       sudo addgroup $(whoami) docker
       sudo service docker start
   - build: |
-      cd emote-server
-      if [ "$(git rev-parse origin/master)" != "$(git rev-parse HEAD)" ]; then
-        echo "We are only building on master."
-        exit 0
-      fi
-      VERSION=$(node -e 'console.log(require("./package.json").version)')
-      docker build . -t mserajnik/emote-server:latest -t mserajnik/emote-server:$VERSION
-      cat ~/.docker-hub-personal-access-token | docker login --username mserajnik --password-stdin
-      docker push mserajnik/emote-server --all-tags
+      cd $project
+      version=$(node -e "console.log(require('./package.json').version)")
+      docker build . -t $docker_image:latest -t $docker_image:$version
+  - publish: |
+      cat ~/.docker-hub-personal-access-token | docker login --username $docker_username --password-stdin
+      docker push $docker_image --all-tags
