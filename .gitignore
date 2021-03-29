@@ -1,0 +1,8 @@
+.env
+*.log
+docker-compose.yml
+emotes/*
+!emotes/.gitkeep
+frozen-emotes/*
+!frozen-emotes/.gitkeep
+node_modules

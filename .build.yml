@@ -1,0 +1,22 @@
+image: alpine/edge
+packages:
+  - docker
+  - nodejs
+sources:
+  - https://git.sr.ht/~mser/emote-server
+secrets:
+  - ceec741f-3de6-4940-980b-4ffda7fdf12d
+tasks:
+  - setup: |
+      sudo addgroup $(whoami) docker
+      sudo service docker start
+  - build: |
+      cd emote-server
+      if [ "$(git rev-parse origin/master)" != "$(git rev-parse HEAD)" ]; then
+        echo "We are only building on master."
+        exit 0
+      fi
+      VERSION=$(node -e 'console.log(require("./package.json").version)')
+      docker build . -t mserajnik/emote-server:latest -t mserajnik/emote-server:$VERSION
+      cat ~/.docker-hub-personal-access-token | docker login --username mserajnik --password-stdin
+      docker push mserajnik/emote-server --all-tags

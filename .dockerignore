@@ -1,0 +1,7 @@
+**/.env
+**/.git
+**/*.log
+**/docker-compose.yml
+**/emotes
+**/frozen-emotes
+**/node_modules

@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+
+  emote-server:
+    image: mserajnik/emote-server:latest
+    restart: unless-stopped
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./data/emotes:/data/emotes
+      - ./data/frozen-emotes:/data/frozen-emotes
+    environment:
+      - TZ=Etc/UTC
+      - EMOTE_SERVER_PUBLIC_URL=http://localhost:8000
+      - EMOTE_SERVER_PORT=8000
+      - EMOTE_SERVER_ACCESS_KEY=
+      - EMOTE_SERVER_NUMBER_OF_WORKERS=
+      - EMOTE_SERVER_SUPPORTED_FILE_EXTENSIONS=png,gif
+      - EMOTE_SERVER_EMOTES_PATH=/data/emotes
+      - EMOTE_SERVER_FROZEN_EMOTES_PATH=/data/frozen-emotes
