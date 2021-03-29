@@ -8,8 +8,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.0.0] - 2021-03-29
+
 ### Added
 
 + Initial release
 
 [Unreleased]: https://git.sr.ht/~mser/emote-server/tree/develop
+[1.0.0]: https://git.sr.ht/~mser/emote-server/tree/1.0.0
