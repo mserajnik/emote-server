@@ -1,0 +1,106 @@
+#!/usr/bin/env node
+
+const path = require('path')
+const cluster = require('cluster')
+
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+
+const config = require('../src/config')
+const service = require('../index.js')
+const logger = require('../src/util/logger')
+
+let shuttingDown = false
+
+const shutDown = signal => {
+  if (!cluster.isMaster) {
+    return
+  }
+
+  shuttingDown = true
+
+  logger.log('Emote server is shutting down…')
+
+  let exitCode = 0
+
+  const promises = []
+  const workerIds = Object.keys(cluster.workers)
+
+  for (const id of workerIds) {
+    const worker = cluster.workers[id]
+
+    promises.push(new Promise(resolve => {
+      let resolved = false
+
+      worker.once('exit', () => {
+        if (resolved) {
+          return
+        }
+
+        resolved = true
+
+        resolve()
+      })
+
+      setTimeout(() => {
+        if (resolved) {
+          return
+        }
+
+        resolved = true
+
+        logger.log('Could not close worker in time, killing it.', 'error')
+
+        worker.kill(signal)
+
+        exitCode = 1
+
+        resolve()
+      }, 4000)
+    }))
+
+    worker.send('shutdown')
+    worker.disconnect()
+  }
+
+  Promise.all(promises).then(() => {
+    process.exit(exitCode)
+  })
+}
+
+;(async () => {
+  if (cluster.isMaster) {
+    logger.log('Emote server is starting…')
+
+    const numberOfWorkers = config.numberOfWorkers > 1
+      ? config.numberOfWorkers
+      : 1
+
+    for (let i = 0; i < numberOfWorkers; i++) {
+      cluster.fork()
+    }
+
+    cluster.on('exit', worker => {
+      if (!shuttingDown) {
+        cluster.fork()
+      }
+    })
+
+    logger.log('Emote server has started.')
+  } else {
+    await service.start(config.port)
+
+    process.on('message', async message => {
+      if (message === 'shutdown') {
+        await service.close()
+      }
+    })
+  }
+})()
+
+process.on('SIGTERM', () => {
+  shutDown('SIGTERM')
+})
+
+process.on('SIGINT', () => {
+  shutDown('SIGINT')
+})

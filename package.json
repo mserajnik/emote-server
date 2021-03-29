@@ -1,0 +1,40 @@
+{
+  "name": "emote-server",
+  "version": "1.0.0",
+  "description": "A simple application to list and serve emotes",
+  "author": "Michael Serajnik <m@mser.at>",
+  "license": "AGPL-3.0-or-later",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://git.sr.ht/~mser/emote-server"
+  },
+  "bugs": {
+    "url": "https://todo.sr.ht/~mser/emote-server"
+  },
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "engines": {
+    "node": ">=14.0.0 <16.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect-query": "^1.0.0",
+    "dotenv": "^8.2.0",
+    "express-fileupload": "^1.2.1",
+    "fast-glob": "^3.2.5",
+    "file-type": "^16.3.0",
+    "gif-frames": "^1.0.1",
+    "joi": "^17.4.0",
+    "restana": "^4.8.1",
+    "send": "^0.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1"
+  }
+}
