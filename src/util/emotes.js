@@ -202,15 +202,15 @@ module.exports = {
 
           ws
             .on('finish', () => resolve(true))
-            .on('error', () => reject(false))
+            .on('error', () => reject(new Error('Failed to write file.')))
 
-            switch (mimeType) {
-              case 'image/gif':
-                frameDataStream.pipe(ws)
-                break
-              case 'image/apng':
-                frameDataStream.pipe(ws)
-            }
+          switch (mimeType) {
+            case 'image/gif':
+              frameDataStream.pipe(ws)
+              break
+            case 'image/apng':
+              frameDataStream.pipe(ws)
+          }
         })
       })()
 
