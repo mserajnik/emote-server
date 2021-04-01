@@ -4,6 +4,9 @@ const fsp = fs.promises
 const fg = require('fast-glob')
 const FileType = require('file-type')
 const gifFrames = require('gif-frames')
+// apng-js requires a Blob polyfill; this is sadly not mentioned in the docs
+globalThis.Blob = require('cross-blob')
+const parseApng = require('apng-js').default
 
 const config = require('../config')
 
@@ -80,7 +83,7 @@ module.exports = {
       }
     }
 
-    const isGifEmote = await this.isGifEmote(fileName)
+    const isAnimatedEmote = await this.isAnimatedEmote(fileName)
 
     try {
       await fsp.unlink(filePath)
@@ -92,7 +95,7 @@ module.exports = {
       }
     }
 
-    if (isGifEmote) {
+    if (isAnimatedEmote) {
       const frozenFilePath = `${config.frozenEmotesPath}/${fileName}.png`
 
       if (await this.frozenEmoteExists(fileName)) {
@@ -120,14 +123,19 @@ module.exports = {
       code: 200
     }
   },
-  async isGifEmote (fileName) {
+  async getMimeType (filePath) {
+    await fsp.access(filePath, fs.constants.F_OK)
+    const fileType = await FileType.fromFile(filePath)
+
+    return fileType.mime
+  },
+  async isAnimatedEmote (fileName) {
     const filePath = `${config.emotesPath}/${fileName}`
 
     try {
-      await fsp.access(filePath, fs.constants.F_OK)
-      const fileType = await FileType.fromFile(filePath)
+      const mimeType = await this.getMimeType(filePath)
 
-      if (!fileType || fileType.mime !== 'image/gif') {
+      if (!mimeType || !['image/gif', 'image/apng'].includes(mimeType)) {
         return false
       }
     } catch {
@@ -155,14 +163,34 @@ module.exports = {
       return true
     }
 
-    let frameData
+    let mimeType
 
     try {
-      frameData = await gifFrames({
-        url: filePath,
-        frames: 0,
-        outputType: 'png'
-      })
+      mimeType = await this.getMimeType(filePath)
+
+      if (!mimeType || !['image/gif', 'image/apng'].includes(mimeType)) {
+        return false
+      }
+    } catch {
+      return false
+    }
+
+    let frameDataStream
+
+    try {
+      switch (mimeType) {
+        case 'image/gif':
+          frameDataStream = (await gifFrames({
+            url: filePath,
+            frames: 0,
+            outputType: 'png'
+          }))[0].getImage()
+          break
+        case 'image/apng':
+          frameDataStream = (parseApng(
+            await fsp.readFile(filePath)
+          )).frames[0].imageData.stream()
+      }
     } catch {
       return false
     }
@@ -176,7 +204,13 @@ module.exports = {
             .on('finish', () => resolve(true))
             .on('error', () => reject(false))
 
-          frameData[0].getImage().pipe(ws)
+            switch (mimeType) {
+              case 'image/gif':
+                frameDataStream.pipe(ws)
+                break
+              case 'image/apng':
+                frameDataStream.pipe(ws)
+            }
         })
       })()
 

@@ -195,7 +195,7 @@ service.get('/frozen-emotes/:emote', async (req, res) => {
     }
   }
 
-  if (!await emotes.isGifEmote(req.params.emote)) {
+  if (!await emotes.isAnimatedEmote(req.params.emote)) {
     return res.send({
       success: false,
       error: 'GetError'
