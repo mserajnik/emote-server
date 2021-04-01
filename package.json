@@ -1,6 +1,6 @@
 {
   "name": "emote-server",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A simple application to list and serve emotes",
   "author": "Michael Serajnik <m@mser.at>",
   "license": "AGPL-3.0-or-later",
@@ -13,14 +13,17 @@
     "url": "https://todo.sr.ht/~mser/emote-server"
   },
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "eslint ."
   },
   "engines": {
     "node": ">=14.0.0 <16.0.0"
   },
   "dependencies": {
+    "apng-js": "^1.1.1",
     "body-parser": "^1.19.0",
     "connect-query": "^1.0.0",
+    "cross-blob": "^2.0.0",
     "dotenv": "^8.2.0",
     "express-fileupload": "^1.2.1",
     "fast-glob": "^3.2.5",

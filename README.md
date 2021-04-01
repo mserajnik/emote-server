@@ -27,7 +27,7 @@ API.
         + [Deleting emotes](#deleting-emotes)
         + [Listing emotes](#listing-emotes)
         + [Getting emotes](#getting-emotes)
-        + [Getting frozen GIF emotes](#getting-frozen-gif-emotes)
+        + [Getting frozen emotes](#getting-frozen-emotes)
 + [Maintainer](#maintainer)
 + [Contribute](#contribute)
 + [License](#license)
@@ -144,9 +144,9 @@ attention to the instructions to prevent issues.
   note that increasing the number of workers beyond the number of logical CPUs
   might be detrimental to performance or cause even more serious issues (e.g.,
   crashes).
-+ `EMOTE_SERVER_SUPPORTED_FILE_EXTENSIONS=png,gif`: sets the file extensions
-  for the files the server should serve. The extensions need to be separated
-  with `,`.
++ `EMOTE_SERVER_SUPPORTED_FILE_EXTENSIONS=png,gif,apng`: sets the file
+  extensions for the files the server should serve. The extensions need to be
+  separated with `,`.
 + `EMOTE_SERVER_EMOTES_PATH=./emotes`: the path emotes are served from. Can be
   relative or absolute.
 
@@ -286,14 +286,14 @@ __Possible errors:__
 + `AccessKeyError`
 + `GetError`
 
-###### Getting frozen GIF emotes
+###### Getting frozen emotes
 
 Responds with a "frozen" PNG version (containing the first frame) of the
-requested GIF emote.
+requested GIF or APNG emote.
 
-__Route:__ `GET /frozen-emotes/<GIF emote filename>`
+__Route:__ `GET /frozen-emotes/<GIF/APNG emote filename>`
 
-__Output on success:__ The requested frozen GIF emote
+__Output on success:__ The requested frozen emote
 
 __Possible errors:__
 

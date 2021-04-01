@@ -8,6 +8,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.1.0] - 2021-04-02
+
+### Added
+
++ Frozen emote generation support for APNGs
+
 ## [1.0.0] - 2021-03-29
 
 ### Added
@@ -15,4 +21,5 @@ and this project adheres to
 + Initial release
 
 [Unreleased]: https://git.sr.ht/~mser/emote-server/tree/develop
+[1.1.0]: https://git.sr.ht/~mser/emote-server/tree/1.1.0
 [1.0.0]: https://git.sr.ht/~mser/emote-server/tree/1.0.0
