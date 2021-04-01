@@ -13,7 +13,7 @@ if (frozenEmotesPath.startsWith('.')) {
 }
 
 module.exports = {
-  version: '1.0.0',
+  version: '1.1.0',
   apiVersion: 1,
   publicUrl: process.env.EMOTE_SERVER_PUBLIC_URL || 'http://localhost',
   port: process.env.EMOTE_SERVER_PORT || 8000,
