@@ -123,6 +123,27 @@ module.exports = {
       code: 200
     }
   },
+  async deleteFrozenEmotes () {
+    const emotePaths = await fg(`${config.frozenEmotesPath}/*.png`)
+
+    for (const emotePath of emotePaths) {
+      try {
+        await fsp.unlink(emotePath)
+      } catch {
+        return {
+          success: false,
+          message: 'DeleteError',
+          code: 500
+        }
+      }
+    }
+
+    return {
+      success: true,
+      message: 'Delete',
+      code: 200
+    }
+  },
   async getMimeType (filePath) {
     await fsp.access(filePath, fs.constants.F_OK)
     const fileType = await FileType.fromFile(filePath)

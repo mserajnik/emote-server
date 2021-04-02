@@ -8,6 +8,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.2.0] - 2021-04-02
+
+### Added
+
++ Route for deleting all frozen emotes (`DELETE /frozen-emotes`)
+
 ## [1.1.0] - 2021-04-02
 
 ### Added
@@ -21,5 +27,6 @@ and this project adheres to
 + Initial release
 
 [Unreleased]: https://git.sr.ht/~mser/emote-server/tree/develop
+[1.2.0]: https://git.sr.ht/~mser/emote-server/tree/1.2.0
 [1.1.0]: https://git.sr.ht/~mser/emote-server/tree/1.1.0
 [1.0.0]: https://git.sr.ht/~mser/emote-server/tree/1.0.0

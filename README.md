@@ -28,6 +28,7 @@ API.
         + [Listing emotes](#listing-emotes)
         + [Getting emotes](#getting-emotes)
         + [Getting frozen emotes](#getting-frozen-emotes)
+        + [Deleting frozen emotes](#deleting-frozen-emotes)
 + [Maintainer](#maintainer)
 + [Contribute](#contribute)
 + [License](#license)
@@ -300,6 +301,28 @@ __Possible errors:__
 + `AccessKeyError`
 + `GetError`
 + `GenerationError`
+
+###### Deleting frozen emotes
+
+Deletes all frozen emotes (without touching their source emotes). Useful for
+forcing regeneration (e.g., after overwriting an emote with another of the same
+name).
+
+__Route:__ `DELETE /frozen-emotes`
+
+__Response on success:__
+
+```json5
+{
+  "success": true,
+  "message": "Delete"
+}
+```
+
+__Possible errors:__
+
++ `AccessKeyError`
++ `DeleteError`
 
 ## Maintainer
 

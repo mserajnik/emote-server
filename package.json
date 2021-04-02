@@ -1,6 +1,6 @@
 {
   "name": "emote-server",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A simple application to list and serve emotes",
   "author": "Michael Serajnik <m@mser.at>",
   "license": "AGPL-3.0-or-later",
