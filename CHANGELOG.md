@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
++ Route for deleting all frozen emotes (`DELETE /frozen-emotes`)
+
 ## [1.1.0] - 2021-04-02
 
 ### Added

@@ -214,4 +214,27 @@ service.get('/frozen-emotes/:emote', async (req, res) => {
     .pipe(res)
 })
 
+service.delete('/frozen-emotes', async (req, res) => {
+  if (config.accessKey !== '') {
+    try {
+      await schemas.emotes.validateAsync({
+        accessKey: req.headers.authorization ||
+          (req.query.accessKey ? `Bearer ${req.query.accessKey}` : null)
+      })
+    } catch {
+      return res.send({
+        success: false,
+        error: 'AccessKeyError'
+      }, 401)
+    }
+  }
+
+  const deleteResponse = await emotes.deleteFrozenEmotes()
+
+  res.send({
+    success: deleteResponse.success,
+    [deleteResponse.success ? 'message' : 'error']: deleteResponse.message
+  }, deleteResponse.code)
+})
+
 module.exports = service
