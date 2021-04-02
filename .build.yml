@@ -19,7 +19,20 @@ tasks:
       sudo service docker start
   - build: |
       cd $project
+
       version=$(node -e "console.log(require('./package.json').version)")
+
+      set +e
+
+      docker_ps_return=1
+      until [ ${docker_ps_return} -eq 0 ]; do
+        docker ps >/dev/null 2>&1
+        docker_ps_return=$?
+        sleep 1
+      done
+
+      set -e
+
       docker build . -t $docker_image:latest -t $docker_image:$version
   - publish: |
       cat ~/.docker-hub-personal-access-token | docker login --username $docker_username --password-stdin
