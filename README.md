@@ -58,7 +58,7 @@ To install without Docker, you can simply clone the repository and install
 dependencies.
 
 ```zsh
-user@local:~$ git clone https://todo.sr.ht/~mser/emote-server
+user@local:~$ git clone https://git.sr.ht/~mser/emote-server
 user@local:~$ cd emote-server
 user@local:emote-server$ yarn
 ```
