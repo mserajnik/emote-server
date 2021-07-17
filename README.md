@@ -152,6 +152,8 @@ attention to the instructions to prevent issues.
   uploading files via the HTTP API. If set to `0`, there is no limit.
 + `EMOTE_SERVER_EMOTES_PATH=./emotes`: the path emotes are served from. Can be
   relative or absolute.
++ `EMOTE_SERVER_FROZEN_EMOTES_PATH=./frozen-emotes`: the path frozen emotes are
+  served from. Can be relative or absolute.
 
 ### API
 
