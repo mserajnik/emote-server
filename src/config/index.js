@@ -13,7 +13,7 @@ if (frozenEmotesPath.startsWith('.')) {
 }
 
 module.exports = {
-  version: '1.2.0',
+  version: '1.3.0',
   apiVersion: 1,
   publicUrl: process.env.EMOTE_SERVER_PUBLIC_URL || 'http://localhost',
   port: process.env.EMOTE_SERVER_PORT || 8000,
@@ -22,6 +22,7 @@ module.exports = {
   accessKey: process.env.EMOTE_SERVER_ACCESS_KEY,
   supportedFileExtensions:
     process.env.EMOTE_SERVER_SUPPORTED_FILE_EXTENSIONS || 'png,gif',
+  fileSizeLimit: process.env.EMOTE_SERVER_FILE_SIZE_LIMIT || 0,
   emotesPath: emotesPath || path.resolve(__dirname, '../..', './emotes'),
   frozenEmotesPath:
     frozenEmotesPath || path.resolve(__dirname, '../..', './frozen-emotes')
