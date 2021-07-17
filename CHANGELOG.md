@@ -8,6 +8,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Fixed
+
++ Bumped the HTTP API version due to the `FileSizeError` that can now occur
+  when adding files
+
 ## [1.3.0] - 2021-07-17
 
 ### Added
