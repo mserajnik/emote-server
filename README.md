@@ -148,6 +148,8 @@ attention to the instructions to prevent issues.
 + `EMOTE_SERVER_SUPPORTED_FILE_EXTENSIONS=png,gif,apng`: sets the file
   extensions for the files the server should serve. The extensions need to be
   separated with `,`.
++ `EMOTE_SERVER_FILE_SIZE_LIMIT=0`: sets the file size limit in bytes when
+  uploading files via the HTTP API. If set to `0`, there is no limit.
 + `EMOTE_SERVER_EMOTES_PATH=./emotes`: the path emotes are served from. Can be
   relative or absolute.
 
@@ -225,6 +227,7 @@ __Response on success:__
 __Possible errors:__
 
 + `AccessKeyError`
++ `FileSizeError`
 + `AddError`
 
 ###### Deleting emotes

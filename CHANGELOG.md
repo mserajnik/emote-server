@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
++ Optional file size limit when uploading via HTTP API
+
 ## [1.2.0] - 2021-04-02
 
 ### Added

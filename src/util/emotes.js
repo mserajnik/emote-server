@@ -54,6 +54,16 @@ module.exports = {
       }
     }
 
+    if (config.fileSizeLimit > 0) {
+      if (Buffer.byteLength(file.data) > config.fileSizeLimit) {
+        return {
+          success: false,
+          message: 'FileSizeError',
+          code: 400
+        }
+      }
+    }
+
     try {
       await fsp.writeFile(`${config.emotesPath}/${file.name}`, file.data)
     } catch {
