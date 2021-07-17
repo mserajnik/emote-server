@@ -8,6 +8,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.3.0] - 2021-07-17
+
 ### Added
 
 + Optional file size limit when uploading via HTTP API
@@ -31,6 +33,7 @@ and this project adheres to
 + Initial release
 
 [Unreleased]: https://git.sr.ht/~mser/emote-server/tree/develop
+[1.3.0]: https://git.sr.ht/~mser/emote-server/tree/1.3.0
 [1.2.0]: https://git.sr.ht/~mser/emote-server/tree/1.2.0
 [1.1.0]: https://git.sr.ht/~mser/emote-server/tree/1.1.0
 [1.0.0]: https://git.sr.ht/~mser/emote-server/tree/1.0.0
