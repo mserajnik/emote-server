@@ -8,6 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.3.1] - 2021-07-17
+
+### Fixed
+
++ Bumped the HTTP API version due to the `FileSizeError` that can now occur
+  when adding files
+
 ## [1.3.0] - 2021-07-17
 
 ### Added
@@ -33,6 +40,7 @@ and this project adheres to
 + Initial release
 
 [Unreleased]: https://git.sr.ht/~mser/emote-server/tree/develop
+[1.3.1]: https://git.sr.ht/~mser/emote-server/tree/1.3.1
 [1.3.0]: https://git.sr.ht/~mser/emote-server/tree/1.3.0
 [1.2.0]: https://git.sr.ht/~mser/emote-server/tree/1.2.0
 [1.1.0]: https://git.sr.ht/~mser/emote-server/tree/1.1.0
