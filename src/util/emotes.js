@@ -23,7 +23,7 @@ module.exports = {
     } catch {
       return {
         success: false,
-        message: 'ListError',
+        error: 'IO',
         code: 500
       }
     }
@@ -49,7 +49,7 @@ module.exports = {
     )) {
       return {
         success: false,
-        message: 'AddError',
+        error: 'UnsupportedFileExtension',
         code: 400
       }
     }
@@ -58,7 +58,7 @@ module.exports = {
       if (Buffer.byteLength(file.data) > config.fileSizeLimit) {
         return {
           success: false,
-          message: 'FileSizeError',
+          error: 'FileSizeLimitExceeded',
           code: 400
         }
       }
@@ -69,27 +69,24 @@ module.exports = {
     } catch {
       return {
         success: false,
-        message: 'AddError',
+        error: 'IO',
         code: 500
       }
     }
 
     return {
       success: true,
-      message: 'Add',
       code: 200
     }
   },
   async delete (fileName) {
     const filePath = `${config.emotesPath}/${fileName}`
 
-    try {
-      await fsp.access(filePath, fs.constants.F_OK)
-    } catch {
+    if (!await this.exists(filePath)) {
       return {
         success: false,
-        message: 'DeleteError',
-        code: 500
+        error: 'FileNotFound',
+        code: 404
       }
     }
 
@@ -100,7 +97,7 @@ module.exports = {
     } catch {
       return {
         success: false,
-        message: 'DeleteError',
+        error: 'IO',
         code: 500
       }
     }
@@ -108,20 +105,19 @@ module.exports = {
     if (isAnimatedEmote) {
       const frozenFilePath = `${config.frozenEmotesPath}/${fileName}.png`
 
-      if (await this.frozenEmoteExists(fileName)) {
+      if (await this.exists(frozenFilePath)) {
         try {
           await fsp.unlink(frozenFilePath)
         } catch {
           return {
             success: false,
-            message: 'DeleteError',
+            error: 'IO',
             code: 500
           }
         }
 
         return {
           success: true,
-          message: 'Delete',
           code: 200
         }
       }
@@ -129,7 +125,6 @@ module.exports = {
 
     return {
       success: true,
-      message: 'Delete',
       code: 200
     }
   },
@@ -142,7 +137,7 @@ module.exports = {
       } catch {
         return {
           success: false,
-          message: 'DeleteError',
+          error: 'IO',
           code: 500
         }
       }
@@ -150,9 +145,17 @@ module.exports = {
 
     return {
       success: true,
-      message: 'Delete',
       code: 200
     }
+  },
+  async exists (filePath) {
+    try {
+      await fsp.access(filePath, fs.constants.F_OK)
+    } catch {
+      return false
+    }
+
+    return true
   },
   async getMimeType (filePath) {
     await fsp.access(filePath, fs.constants.F_OK)
@@ -175,22 +178,11 @@ module.exports = {
 
     return true
   },
-  async frozenEmoteExists (fileName) {
-    const frozenFilePath = `${config.frozenEmotesPath}/${fileName}.png`
-
-    try {
-      await fsp.access(frozenFilePath, fs.constants.F_OK)
-    } catch {
-      return false
-    }
-
-    return true
-  },
   async ensureFrozenEmoteExists (fileName) {
     const filePath = `${config.emotesPath}/${fileName}`
     const frozenFilePath = `${config.frozenEmotesPath}/${fileName}.png`
 
-    if (await this.frozenEmoteExists(fileName)) {
+    if (await this.exists(frozenFilePath)) {
       return true
     }
 

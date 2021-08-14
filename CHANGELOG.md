@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
++ Improved the HTTP API responses
+
 ## [1.3.1] - 2021-07-17
 
 ### Fixed
