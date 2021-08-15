@@ -11,6 +11,9 @@ and this project adheres to
 ### Changed
 
 + Improved the HTTP API responses
++ Made it so that it is no longer possible to add a file of the same name as an
+  existing one (instead, the existing one has to be deleted manually
+  beforehand)
 
 ## [1.3.1] - 2021-07-17
 

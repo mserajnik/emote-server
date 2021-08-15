@@ -212,9 +212,8 @@ __Possible errors:__
 
 ###### Adding emotes
 
-Adds a new emote. If a file with the same name already exists it will be
-overwritten. The request has to be of type `multipart-form-data` and the file
-needs to have the key `emote`.
+Adds a new emote. The request has to be of type `multipart-form-data` and the
+file needs to have the key `emote`.
 
 __Route:__ `POST /emotes`
 
@@ -236,6 +235,7 @@ __Possible errors:__
   `EMOTE_SERVER_SUPPORTED_FILE_EXTENSIONS`)
 + `FileSizeLimitExceeded` (`400`): indicates that the file exceeds the file
   size limit (configured via `EMOTE_SERVER_FILE_SIZE_LIMIT`)
++ `FileExists` (`403`): indicates that a file of the same name already exists
 + `IO` (`500`): indicates an I/O issue (e.g., missing write permissions)
 
 ###### Deleting emotes

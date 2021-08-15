@@ -64,8 +64,18 @@ module.exports = {
       }
     }
 
+    const filePath = `${config.emotesPath}/${file.name}`
+
+    if (await this.exists(filePath)) {
+      return {
+        success: false,
+        error: 'FileExists',
+        code: 403
+      }
+    }
+
     try {
-      await fsp.writeFile(`${config.emotesPath}/${file.name}`, file.data)
+      await fsp.writeFile(filePath, file.data)
     } catch {
       return {
         success: false,
