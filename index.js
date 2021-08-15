@@ -69,7 +69,7 @@ service.get('/', async (req, res) => {
     } catch {
       return res.send({
         success: false,
-        error: 'AccessKeyError'
+        error: 'InvalidAccessKey'
       }, 401)
     }
   }
@@ -92,7 +92,7 @@ service.get('/emotes', async (req, res) => {
     } catch {
       return res.send({
         success: false,
-        error: 'AccessKeyError'
+        error: 'InvalidAccessKey'
       }, 401)
     }
   }
@@ -103,7 +103,7 @@ service.get('/emotes', async (req, res) => {
     success: listResponse.success,
     [listResponse.success ? 'emotes' : 'error']: listResponse.success
       ? listResponse.emotes
-      : listResponse.message
+      : listResponse.error
   }, listResponse.code)
 })
 
@@ -117,15 +117,15 @@ service.post('/emotes', async (req, res) => {
     } catch {
       return res.send({
         success: false,
-        error: 'AccessKeyError'
+        error: 'InvalidAccessKey'
       }, 401)
     }
   }
 
-  if (!req.files && req.files.emote) {
+  if (!req.files?.emote) {
     return res.send({
       success: false,
-      error: 'AddError'
+      error: 'MissingFile'
     }, 400)
   }
 
@@ -133,7 +133,7 @@ service.post('/emotes', async (req, res) => {
 
   res.send({
     success: addResponse.success,
-    [addResponse.success ? 'message' : 'error']: addResponse.message
+    ...(addResponse.success ? {} : { error: addResponse.error })
   }, addResponse.code)
 })
 
@@ -147,13 +147,16 @@ service.get('/emotes/:emote', async (req, res) => {
     } catch {
       return res.send({
         success: false,
-        error: 'AccessKeyError'
+        error: 'InvalidAccessKey'
       }, 401)
     }
   }
 
   send(req, `${config.emotesPath}/${req.params.emote}`)
-    .on('error', () => res.send({ success: false, error: 'GetError' }, 404))
+    .on(
+      'error',
+      () => res.send({ success: false, error: 'FileNotFound' }, 404)
+    )
     .pipe(res)
 })
 
@@ -167,7 +170,7 @@ service.delete('/emotes/:emote', async (req, res) => {
     } catch {
       return res.send({
         success: false,
-        error: 'AccessKeyError'
+        error: 'InvalidAccessKey'
       }, 401)
     }
   }
@@ -176,7 +179,7 @@ service.delete('/emotes/:emote', async (req, res) => {
 
   res.send({
     success: deleteResponse.success,
-    [deleteResponse.success ? 'message' : 'error']: deleteResponse.message
+    ...(deleteResponse.success ? {} : { error: deleteResponse.error })
   }, deleteResponse.code)
 })
 
@@ -190,7 +193,7 @@ service.get('/frozen-emotes/:emote', async (req, res) => {
     } catch {
       return res.send({
         success: false,
-        error: 'AccessKeyError'
+        error: 'InvalidAccessKey'
       }, 401)
     }
   }
@@ -198,19 +201,22 @@ service.get('/frozen-emotes/:emote', async (req, res) => {
   if (!await emotes.isAnimatedEmote(req.params.emote)) {
     return res.send({
       success: false,
-      error: 'GetError'
+      error: 'FileNotFound'
     }, 404)
   }
 
   if (!await emotes.ensureFrozenEmoteExists(req.params.emote)) {
     return res.send({
       success: false,
-      error: 'GenerationError'
+      error: 'IO'
     }, 500)
   }
 
   send(req, `${config.frozenEmotesPath}/${req.params.emote}.png`)
-    .on('error', () => res.send({ success: false, error: 'GetError' }, 404))
+    .on(
+      'error',
+      () => res.send({ success: false, error: 'FileNotFound' }, 404)
+    )
     .pipe(res)
 })
 
@@ -224,7 +230,7 @@ service.delete('/frozen-emotes', async (req, res) => {
     } catch {
       return res.send({
         success: false,
-        error: 'AccessKeyError'
+        error: 'InvalidAccessKey'
       }, 401)
     }
   }
@@ -233,7 +239,7 @@ service.delete('/frozen-emotes', async (req, res) => {
 
   res.send({
     success: deleteResponse.success,
-    [deleteResponse.success ? 'message' : 'error']: deleteResponse.message
+    ...(deleteResponse.success ? {} : { error: deleteResponse.error })
   }, deleteResponse.code)
 })
 

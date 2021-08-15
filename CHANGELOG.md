@@ -8,6 +8,15 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.4.0] - 2021-08-15
+
+### Changed
+
++ Improved the HTTP API responses
++ Made it so that it is no longer possible to add a file of the same name as an
+  existing one (instead, the existing one has to be deleted manually
+  beforehand)
+
 ## [1.3.1] - 2021-07-17
 
 ### Fixed
@@ -40,6 +49,7 @@ and this project adheres to
 + Initial release
 
 [Unreleased]: https://git.sr.ht/~mser/emote-server/tree/develop
+[1.4.0]: https://git.sr.ht/~mser/emote-server/tree/1.4.0
 [1.3.1]: https://git.sr.ht/~mser/emote-server/tree/1.3.1
 [1.3.0]: https://git.sr.ht/~mser/emote-server/tree/1.3.0
 [1.2.0]: https://git.sr.ht/~mser/emote-server/tree/1.2.0

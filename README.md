@@ -169,10 +169,10 @@ publicly accessible as well.
 The base route (`GET /`) does not require authentication, but can _optionally_
 be used to verify access keys. To do this, simply pass an access key as you
 normally would, in which case it will either respond normally when using a
-valid access key or with an `AccessKeyError` when using an invalid one.
+valid access key or with an `InvalidAccessKey` error when using an invalid one.
 
-In case of any occuring errors, the response will have the following format
-and an appropriate HTTP status code:
+In case of any occuring errors, the response will have the following format and
+an appropriate HTTP status code:
 
 ```json5
 {
@@ -187,8 +187,8 @@ and an appropriate HTTP status code:
 
 Responds with the version number and the API version number of the
 installation. The API version number will increase by 1 every time an existing
-API endpoint is modified in a way it behaves differently than before or
-removed altogether.
+API endpoint is modified in a way it behaves differently than before or removed
+altogether.
 
 __Route:__ `GET /`
 
@@ -205,15 +205,15 @@ __Response on success:__
 
 __Possible errors:__
 
-+ `AccessKeyError`
++ `InvalidAccessKey` (`401`): indicates a missing or wrong access key
+  (configured via `EMOTE_SERVER_ACCESS_KEY`)
 
 ##### Emotes
 
 ###### Adding emotes
 
-Adds a new emote. If a file with the same name already exists it will be
-overwritten. The request has to be of type `multipart-form-data` and the file
-needs to have the key `emote`.
+Adds a new emote. The request has to be of type `multipart-form-data` and the
+file needs to have the key `emote`.
 
 __Route:__ `POST /emotes`
 
@@ -221,16 +221,22 @@ __Response on success:__
 
 ```json5
 {
-  "success": true,
-  "message": "Add"
+  "success": true
 }
 ```
 
 __Possible errors:__
 
-+ `AccessKeyError`
-+ `FileSizeError`
-+ `AddError`
++ `InvalidAccessKey` (`401`): indicates a missing or wrong access key
+  (configured via `EMOTE_SERVER_ACCESS_KEY`)
++ `MissingFile` (`400`): indicates that the file is missing
++ `UnsupportedFileExtension` (`400`): indicates that the file has an
+  unsupported file extension (configured via
+  `EMOTE_SERVER_SUPPORTED_FILE_EXTENSIONS`)
++ `FileSizeLimitExceeded` (`400`): indicates that the file exceeds the file
+  size limit (configured via `EMOTE_SERVER_FILE_SIZE_LIMIT`)
++ `FileExists` (`403`): indicates that a file of the same name already exists
++ `IO` (`500`): indicates an I/O issue (e.g., missing write permissions)
 
 ###### Deleting emotes
 
@@ -243,15 +249,16 @@ __Response on success:__
 
 ```json5
 {
-  "success": true,
-  "message": "Delete"
+  "success": true
 }
 ```
 
 __Possible errors:__
 
-+ `AccessKeyError`
-+ `DeleteError`
++ `InvalidAccessKey` (`401`): indicates a missing or wrong access key
+  (configured via `EMOTE_SERVER_ACCESS_KEY`)
++ `FileNotFound` (`404`): indicates that the file does not exist
++ `IO` (`500`): indicates an I/O issue (e.g., missing write permissions)
 
 ###### Listing emotes
 
@@ -276,8 +283,9 @@ __Response on success:__
 
 __Possible errors:__
 
-+ `AccessKeyError`
-+ `ListError`
++ `InvalidAccessKey` (`401`): indicates a missing or wrong access key
+  (configured via `EMOTE_SERVER_ACCESS_KEY`)
++ `IO` (`500`): indicates an I/O issue (e.g., missing write permissions)
 
 ###### Getting emotes
 
@@ -289,8 +297,9 @@ __Output on success:__ The requested emote
 
 __Possible errors:__
 
-+ `AccessKeyError`
-+ `GetError`
++ `InvalidAccessKey` (`401`): indicates a missing or wrong access key
+  (configured via `EMOTE_SERVER_ACCESS_KEY`)
++ `FileNotFound` (`404`): indicates that the file does not exist
 
 ###### Getting frozen emotes
 
@@ -303,9 +312,10 @@ __Output on success:__ The requested frozen emote
 
 __Possible errors:__
 
-+ `AccessKeyError`
-+ `GetError`
-+ `GenerationError`
++ `InvalidAccessKey` (`401`): indicates a missing or wrong access key
+  (configured via `EMOTE_SERVER_ACCESS_KEY`)
++ `FileNotFound` (`404`): indicates that the file does not exist
++ `IO` (`500`): indicates an I/O issue (e.g., missing write permissions)
 
 ###### Deleting frozen emotes
 
@@ -319,15 +329,15 @@ __Response on success:__
 
 ```json5
 {
-  "success": true,
-  "message": "Delete"
+  "success": true
 }
 ```
 
 __Possible errors:__
 
-+ `AccessKeyError`
-+ `DeleteError`
++ `InvalidAccessKey` (`401`): indicates a missing or wrong access key
+  (configured via `EMOTE_SERVER_ACCESS_KEY`)
++ `IO` (`500`): indicates an I/O issue (e.g., missing write permissions)
 
 ## Maintainer
 
