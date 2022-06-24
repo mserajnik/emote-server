@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
++ Maintenance release
+
 ## [1.4.0] - 2021-08-15
 
 ### Changed
