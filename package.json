@@ -7,10 +7,10 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://git.sr.ht/~mser/emote-server"
+    "url": "git+https://github.com/mserajnik/emote-server.git"
   },
   "bugs": {
-    "url": "https://todo.sr.ht/~mser/emote-server"
+    "url": "https://github.com/mserajnik/emote-server/issues"
   },
   "scripts": {
     "start": "node ./bin/www",

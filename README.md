@@ -1,4 +1,4 @@
-# emote-server [![builds.sr.ht status][build-status-badge]][build-status]
+# emote-server [![GitHub Actions status][actions-status-badge]][actions-status]
 
 > A simple application to list and serve emotes
 
@@ -40,11 +40,10 @@ to run without it are also provided.
 
 ### Installing with Docker
 
-To use this application with Docker, you can simply pull the prebuilt image
-from [Docker Hub][docker-hub]:
+To use this application with Docker, you can simply pull the prebuilt image:
 
 ```zsh
-user@local:~$ docker pull mserajnik/emote-server
+user@local:~$ docker pull ghcr.io/mserajnik/emote-server
 ```
 
 Alternatively, you can also build the image yourself. The user that is used
@@ -58,7 +57,7 @@ To install without Docker, you can simply clone the repository and install
 dependencies.
 
 ```zsh
-user@local:~$ git clone https://git.sr.ht/~mser/emote-server
+user@local:~$ git clone https://github.com/mserajnik/emote-server.git
 user@local:~$ cd emote-server
 user@local:emote-server$ yarn
 ```
@@ -71,7 +70,7 @@ user@local:emote-server$ yarn
 
 This application should work with both the latest LTS and the latest stable
 version of Node.js. If you encounter any issues with either of those versions
-when not using Docker, please [let me know][tickets].
+when not using Docker, please [let me know][issues].
 
 ### Updating
 
@@ -88,7 +87,7 @@ versions.
 Simply pull the latest Docker image to update:
 
 ```zsh
-user@local:~$ docker pull mserajnik/emote-server
+user@local:~$ docker pull ghcr.io/mserajnik/emote-server
 ```
 
 #### Updating without Docker
@@ -347,22 +346,19 @@ __Possible errors:__
 
 You are welcome to help out!
 
-[Open a ticket][tickets] or [send a patch][patches].
+[Open an issue][issues] or [make a pull request][pull-requests].
 
 ## License
 
 [AGPLv3](LICENSE) © Michael Serajnik
 
+[actions-status]: https://github.com/mserajnik/emote-server/actions
+[actions-status-badge]: https://github.com/mserajnik/emote-server/actions/workflows/docker.yml/badge.svg
 [docker]: https://www.docker.com/
-[docker-hub]: https://hub.docker.com/r/mserajnik/emote-server/
-[node-js]: https://nodejs.org/en/
-[yarn]: https://yarnpkg.com/
-[semantic-versioning]: https://semver.org/
 [docker-compose]: https://docs.docker.com/compose/
-
-[build-status]: https://builds.sr.ht/~mser/emote-server
-[build-status-badge]: https://builds.sr.ht/~mser/emote-server.svg
-
-[maintainer]: https://sr.ht/~mser/
-[tickets]: https://todo.sr.ht/~mser/emote-server
-[patches]: https://lists.sr.ht/~mser/public-inbox
+[issues]: https://github.com/mserajnik/emote-server/issues
+[maintainer]: https://github.com/mserajnik
+[node-js]: https://nodejs.org/en/
+[pull-requests]: https://github.com/mserajnik/emote-server/pulls
+[semantic-versioning]: https://semver.org/
+[yarn]: https://yarnpkg.com/
