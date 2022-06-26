@@ -8,6 +8,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.5.0] - 2022-06-26
+
+### Changed
+
++ Maintenance release
+
 ## [1.4.0] - 2021-08-15
 
 ### Changed
@@ -42,16 +48,16 @@ and this project adheres to
 
 + Frozen emote generation support for APNGs
 
-## [1.0.0] - 2021-03-29
+## 1.0.0 - 2021-03-29
 
 ### Added
 
 + Initial release
 
-[Unreleased]: https://git.sr.ht/~mser/emote-server/tree/develop
-[1.4.0]: https://git.sr.ht/~mser/emote-server/tree/1.4.0
-[1.3.1]: https://git.sr.ht/~mser/emote-server/tree/1.3.1
-[1.3.0]: https://git.sr.ht/~mser/emote-server/tree/1.3.0
-[1.2.0]: https://git.sr.ht/~mser/emote-server/tree/1.2.0
-[1.1.0]: https://git.sr.ht/~mser/emote-server/tree/1.1.0
-[1.0.0]: https://git.sr.ht/~mser/emote-server/tree/1.0.0
+[Unreleased]: https://github.com/mserajnik/emote-server/compare/1.5.0...develop
+[1.5.0]: https://github.com/mserajnik/emote-server/compare/1.4.0...1.5.0
+[1.4.0]: https://github.com/mserajnik/emote-server/compare/1.3.1...1.4.0
+[1.3.1]: https://github.com/mserajnik/emote-server/compare/1.3.0...1.3.1
+[1.3.0]: https://github.com/mserajnik/emote-server/compare/1.2.0...1.3.0
+[1.2.0]: https://github.com/mserajnik/emote-server/compare/1.1.0...1.2.0
+[1.1.0]: https://github.com/mserajnik/emote-server/compare/1.0.0...1.1.0

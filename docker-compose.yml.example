@@ -3,7 +3,7 @@ version: '3'
 services:
 
   emote-server:
-    image: mserajnik/emote-server:latest
+    image: ghcr.io/mserajnik/emote-server:latest
     restart: unless-stopped
     ports:
       - '8000:8000'
