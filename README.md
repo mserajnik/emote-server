@@ -59,14 +59,13 @@ dependencies.
 ```zsh
 user@local:~$ git clone https://github.com/mserajnik/emote-server.git
 user@local:~$ cd emote-server
-user@local:emote-server$ yarn
+user@local:emote-server$ npm i
 ```
 
 ### Dependencies
 
 + [Docker][docker] (when using Docker)
 + [Node.js][node-js] (when not using Docker)
-+ [Yarn][yarn] (when not using Docker)
 
 This application should work with both the latest LTS and the latest stable
 version of Node.js. If you encounter any issues with either of those versions
@@ -96,7 +95,7 @@ If you chose not to use Docker, you can update via Git:
 
 ```zsh
 user@local:emote-server$ git pull
-user@local:emote-server$ yarn
+user@local:emote-server$ npm i
 ```
 
 ## Usage
@@ -123,7 +122,7 @@ To run without Docker, you will first need to duplicate the `.env.example` as
 After that, you can start the application:
 
 ```zsh
-user@local:emote-server$ yarn start
+user@local:emote-server$ npm run start
 ```
 
 ### Configuration
@@ -361,4 +360,3 @@ You are welcome to help out!
 [node-js]: https://nodejs.org/en/
 [pull-requests]: https://github.com/mserajnik/emote-server/pulls
 [semantic-versioning]: https://semver.org/
-[yarn]: https://yarnpkg.com/

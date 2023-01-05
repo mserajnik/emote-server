@@ -17,27 +17,27 @@
     "test": "eslint ."
   },
   "engines": {
-    "node": ">=16.0.0 <19.0.0"
+    "node": ">=18.0.0 <20.0.0"
   },
   "dependencies": {
     "apng-js": "^1.1.1",
-    "body-parser": "^1.20.0",
+    "body-parser": "^1.20.1",
     "connect-query": "^1.0.0",
     "cross-blob": "2.0.1",
-    "dotenv": "^16.0.1",
+    "dotenv": "^16.0.3",
     "express-fileupload": "^1.4.0",
-    "fast-glob": "^3.2.11",
-    "file-type": "16.5.3",
+    "fast-glob": "^3.2.12",
+    "file-type": "16.5.4",
     "gif-frames": "^1.0.1",
-    "joi": "^17.6.0",
-    "restana": "^4.9.6",
+    "joi": "^17.7.0",
+    "restana": "^4.9.7",
     "send": "^0.18.0"
   },
   "devDependencies": {
-    "eslint": "^8.18.0",
+    "eslint": "^8.31.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.2.3",
-    "eslint-plugin-promise": "^6.0.0"
+    "eslint-plugin-n": "^15.6.0",
+    "eslint-plugin-promise": "^6.1.1"
   }
 }
