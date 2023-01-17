@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
++ Switched to using GraphicsMagick/ImageMagick for frozen emote generation
+
 ## [1.5.0] - 2022-06-26
 
 ### Changed

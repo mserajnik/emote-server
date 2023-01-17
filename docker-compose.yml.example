@@ -12,6 +12,8 @@ services:
       - ./data/frozen-emotes:/data/frozen-emotes
     environment:
       - TZ=Etc/UTC
+      - EMOTE_SERVER_DEBUG=false
+      - EMOTE_SERVER_USE_IMAGE_MAGICK=false
       - EMOTE_SERVER_PUBLIC_URL=http://localhost:8000
       - EMOTE_SERVER_PORT=8000
       - EMOTE_SERVER_ACCESS_KEY=

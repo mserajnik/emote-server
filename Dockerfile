@@ -13,7 +13,8 @@ COPY . .
 
 RUN \
   apk --no-cache add \
-    gettext && \
+    gettext \
+    graphicsmagick && \
   npm i --omit=dev && \
   chown -R ${USER_ID}:${GROUP_ID} /usr/src/app && \
   mkdir /data && chown -R ${USER_ID}:${GROUP_ID} /data
