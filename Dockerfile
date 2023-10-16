@@ -1,4 +1,4 @@
-FROM node:19-alpine
+FROM node:20-alpine
 
 ARG USER_ID=1000
 ARG GROUP_ID=1000

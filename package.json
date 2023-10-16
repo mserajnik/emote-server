@@ -17,25 +17,25 @@
     "test": "eslint ."
   },
   "engines": {
-    "node": ">=18.0.0 <20.0.0"
+    "node": ">=18.0.0 <21.0.0"
   },
   "dependencies": {
-    "body-parser": "^1.20.1",
+    "body-parser": "^1.20.2",
     "connect-query": "^1.0.0",
-    "dotenv": "^16.0.3",
-    "express-fileupload": "^1.4.0",
-    "fast-glob": "^3.2.12",
+    "dotenv": "^16.3.1",
+    "express-fileupload": "^1.4.1",
+    "fast-glob": "^3.3.1",
     "file-type": "16.5.4",
     "gm": "^1.25.0",
-    "joi": "^17.7.0",
+    "joi": "^17.11.0",
     "restana": "^4.9.7",
     "send": "^0.18.0"
   },
   "devDependencies": {
-    "eslint": "^8.32.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-n": "^15.6.1",
+    "eslint": "^8.51.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.2.0",
     "eslint-plugin-promise": "^6.1.1"
   }
 }
