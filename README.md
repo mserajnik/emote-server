@@ -16,6 +16,7 @@ API.
   + [Updating](#updating)
     + [Updating with Docker](#updating-with-docker)
     + [Updating without Docker](#updating-without-docker)
+    + [Updating to major version `2`](#updating-to-to-major-version-2)
 + [Usage](#usage)
   + [Running with Docker](#running-with-docker)
   + [Running without Docker](#running-without-docker)
@@ -106,6 +107,21 @@ If you chose not to use Docker, you can update via Git:
 user@local:emote-server$ git pull
 user@local:emote-server$ npm i
 ```
+
+#### Updating to to major version `2`
+
+Version `2.0.0` got rid of some (outdated) dependencies for frozen emote
+generation. Instead, [GraphicsMagick][graphicsmagick] or
+[ImageMagick][imagemagick] is used (to have a maintained and just overall
+better solution).
+
+If you are using Docker there is nothing to do aside from pulling the latest
+image (as GraphicsMagick is installed inside the container).
+
+If you are not using Docker you have to install  either of those libraries. By
+default it is assumed that you are using GraphicsMagick; if you want to use
+ImageMagick instead, you will have to set `EMOTE_SERVER_USE_IMAGE_MAGICK` to
+`true`.
 
 ## Usage
 
