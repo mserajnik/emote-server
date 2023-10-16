@@ -8,6 +8,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [2.0.0] - 2023-10-17
+
 ### Changed
 
 + Switched to using GraphicsMagick/ImageMagick for frozen emote generation
@@ -58,7 +60,8 @@ and this project adheres to
 
 + Initial release
 
-[Unreleased]: https://github.com/mserajnik/emote-server/compare/1.5.0...develop
+[Unreleased]: https://github.com/mserajnik/emote-server/compare/2.0.0...develop
+[2.0.0]: https://github.com/mserajnik/emote-server/compare/1.5.0...2.0.0
 [1.5.0]: https://github.com/mserajnik/emote-server/compare/1.4.0...1.5.0
 [1.4.0]: https://github.com/mserajnik/emote-server/compare/1.3.1...1.4.0
 [1.3.1]: https://github.com/mserajnik/emote-server/compare/1.3.0...1.3.1
