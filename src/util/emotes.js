@@ -3,12 +3,13 @@ const fs = require('fs')
 const fsp = fs.promises
 const fg = require('fast-glob')
 const FileType = require('file-type')
-const gifFrames = require('gif-frames')
-// apng-js requires a Blob polyfill; this is sadly not mentioned in the docs
-globalThis.Blob = require('cross-blob')
-const parseApng = require('apng-js').default
 
 const config = require('../config')
+const logger = require('./logger')
+
+const gm = config.useImageMagick
+  ? require('gm').subClass({ imageMagick: true })
+  : require('gm')
 
 module.exports = {
   async list () {
@@ -20,7 +21,11 @@ module.exports = {
       emotePaths = await fg(
         `${config.emotesPath}/*.{${config.supportedFileExtensions}}`
       )
-    } catch {
+    } catch (err) {
+      if (config.debug) {
+        logger.log(err, 'error')
+      }
+
       return {
         success: false,
         error: 'IO',
@@ -45,7 +50,7 @@ module.exports = {
   },
   async add (file) {
     if (!config.supportedFileExtensions.split(',').includes(
-      path.extname(file.name).substr(1)
+      path.extname(file.name).substring(1)
     )) {
       return {
         success: false,
@@ -76,7 +81,11 @@ module.exports = {
 
     try {
       await fsp.writeFile(filePath, file.data)
-    } catch {
+    } catch (err) {
+      if (config.debug) {
+        logger.log(err, 'error')
+      }
+
       return {
         success: false,
         error: 'IO',
@@ -104,7 +113,11 @@ module.exports = {
 
     try {
       await fsp.unlink(filePath)
-    } catch {
+    } catch (err) {
+      if (config.debug) {
+        logger.log(err, 'error')
+      }
+
       return {
         success: false,
         error: 'IO',
@@ -118,7 +131,11 @@ module.exports = {
       if (await this.exists(frozenFilePath)) {
         try {
           await fsp.unlink(frozenFilePath)
-        } catch {
+        } catch (err) {
+          if (config.debug) {
+            logger.log(err, 'error')
+          }
+
           return {
             success: false,
             error: 'IO',
@@ -144,7 +161,11 @@ module.exports = {
     for (const emotePath of emotePaths) {
       try {
         await fsp.unlink(emotePath)
-      } catch {
+      } catch (err) {
+        if (config.debug) {
+          logger.log(err, 'error')
+        }
+
         return {
           success: false,
           error: 'IO',
@@ -208,42 +229,22 @@ module.exports = {
       return false
     }
 
-    let frameDataStream
-
-    try {
-      switch (mimeType) {
-        case 'image/gif':
-          frameDataStream = (await gifFrames({
-            url: filePath,
-            frames: 0,
-            outputType: 'png'
-          }))[0].getImage()
-          break
-        case 'image/apng':
-          frameDataStream = (parseApng(
-            await fsp.readFile(filePath)
-          )).frames[0].imageData.stream()
-      }
-    } catch {
-      return false
-    }
-
     try {
       await (async () => {
         return new Promise((resolve, reject) => {
-          const ws = fs.createWriteStream(frozenFilePath)
+          gm(filePath)
+            .selectFrame(0)
+            .write(frozenFilePath, err => {
+              if (err) {
+                if (config.debug) {
+                  logger.log(err, 'error')
+                }
 
-          ws
-            .on('finish', () => resolve(true))
-            .on('error', () => reject(new Error('Failed to write file.')))
+                reject(new Error('Failed to write file.'))
+              }
 
-          switch (mimeType) {
-            case 'image/gif':
-              frameDataStream.pipe(ws)
-              break
-            case 'image/apng':
-              frameDataStream.pipe(ws)
-          }
+              resolve(true)
+            })
         })
       })()
 

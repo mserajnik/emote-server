@@ -1,6 +1,6 @@
 {
   "name": "emote-server",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "description": "A simple application to list and serve emotes",
   "author": "Michael Serajnik <m@mser.at>",
   "license": "AGPL-3.0-or-later",
@@ -17,27 +17,25 @@
     "test": "eslint ."
   },
   "engines": {
-    "node": ">=16.0.0 <19.0.0"
+    "node": ">=18.0.0 <21.0.0"
   },
   "dependencies": {
-    "apng-js": "^1.1.1",
-    "body-parser": "^1.20.0",
+    "body-parser": "^1.20.2",
     "connect-query": "^1.0.0",
-    "cross-blob": "2.0.1",
-    "dotenv": "^16.0.1",
-    "express-fileupload": "^1.4.0",
-    "fast-glob": "^3.2.11",
-    "file-type": "16.5.3",
-    "gif-frames": "^1.0.1",
-    "joi": "^17.6.0",
-    "restana": "^4.9.6",
+    "dotenv": "^16.3.1",
+    "express-fileupload": "^1.4.1",
+    "fast-glob": "^3.3.1",
+    "file-type": "16.5.4",
+    "gm": "^1.25.0",
+    "joi": "^17.11.0",
+    "restana": "^4.9.7",
     "send": "^0.18.0"
   },
   "devDependencies": {
-    "eslint": "^8.18.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.2.3",
-    "eslint-plugin-promise": "^6.0.0"
+    "eslint": "^8.51.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.2.0",
+    "eslint-plugin-promise": "^6.1.1"
   }
 }

@@ -11,9 +11,12 @@ API.
   + [Installing with Docker](#installing-with-docker)
   + [Installing without Docker](#installing-without-docker)
   + [Dependencies](#dependencies)
+    + [When using Docker](#when-using-docker)
+    + [When not using Docker](#when-not-using-docker)
   + [Updating](#updating)
     + [Updating with Docker](#updating-with-docker)
     + [Updating without Docker](#updating-without-docker)
+    + [Updating to major version `2`](#updating-to-to-major-version-2)
 + [Usage](#usage)
   + [Running with Docker](#running-with-docker)
   + [Running without Docker](#running-without-docker)
@@ -59,14 +62,20 @@ dependencies.
 ```zsh
 user@local:~$ git clone https://github.com/mserajnik/emote-server.git
 user@local:~$ cd emote-server
-user@local:emote-server$ yarn
+user@local:emote-server$ npm i
 ```
 
 ### Dependencies
 
-+ [Docker][docker] (when using Docker)
-+ [Node.js][node-js] (when not using Docker)
-+ [Yarn][yarn] (when not using Docker)
+#### When using Docker
+
+None, besides [Docker][docker] itself.
+
+#### When not using Docker
+
++ [Node.js][node-js]
++ [GraphicsMagick][graphicsmagick] or [ImageMagick][imagemagick] (set
+  `EMOTE_SERVER_USE_IMAGE_MAGICK` accordingly)
 
 This application should work with both the latest LTS and the latest stable
 version of Node.js. If you encounter any issues with either of those versions
@@ -96,8 +105,23 @@ If you chose not to use Docker, you can update via Git:
 
 ```zsh
 user@local:emote-server$ git pull
-user@local:emote-server$ yarn
+user@local:emote-server$ npm i
 ```
+
+#### Updating to to major version `2`
+
+Version `2.0.0` got rid of some (outdated) dependencies for frozen emote
+generation. Instead, [GraphicsMagick][graphicsmagick] or
+[ImageMagick][imagemagick] is used (to have a maintained and just overall
+better solution).
+
+If you are using Docker there is nothing to do aside from pulling the latest
+image (as GraphicsMagick is installed inside the container).
+
+If you are not using Docker you have to install  either of those libraries. By
+default it is assumed that you are using GraphicsMagick; if you want to use
+ImageMagick instead, you will have to set `EMOTE_SERVER_USE_IMAGE_MAGICK` to
+`true`.
 
 ## Usage
 
@@ -123,7 +147,7 @@ To run without Docker, you will first need to duplicate the `.env.example` as
 After that, you can start the application:
 
 ```zsh
-user@local:emote-server$ yarn start
+user@local:emote-server$ npm run start
 ```
 
 ### Configuration
@@ -131,6 +155,9 @@ user@local:emote-server$ yarn start
 Configuration is done entirely via environment variables. Please pay special
 attention to the instructions to prevent issues.
 
++ `EMOTE_SERVER_DEBUG`: prints errors to stderr if set to `true`.
++ `EMOTE_SERVER_USE_IMAGE_MAGICK=false`: instructs the server to use
+  ImageMagick instead of GraphicsMagick when set to `true`.
 + `EMOTE_SERVER_PUBLIC_URL=http://localhost:8000`: the public URL the server
   will use to display file URLs. __No trailings slashes.__
 + `EMOTE_SERVER_PORT=8000`: the port the server is listening on.
@@ -356,9 +383,10 @@ You are welcome to help out!
 [actions-status-badge]: https://github.com/mserajnik/emote-server/actions/workflows/docker.yml/badge.svg
 [docker]: https://www.docker.com/
 [docker-compose]: https://docs.docker.com/compose/
+[graphicsmagick]: http://www.graphicsmagick.org/
+[imagemagick]: https://imagemagick.org/
 [issues]: https://github.com/mserajnik/emote-server/issues
 [maintainer]: https://github.com/mserajnik
 [node-js]: https://nodejs.org/en/
 [pull-requests]: https://github.com/mserajnik/emote-server/pulls
 [semantic-versioning]: https://semver.org/
-[yarn]: https://yarnpkg.com/

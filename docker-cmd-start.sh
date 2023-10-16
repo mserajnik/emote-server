@@ -9,5 +9,5 @@ trap "stop" SIGTERM
 
 envsubst < .env.docker > .env
 
-yarn start &
+npm run start &
 wait $!

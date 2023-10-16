@@ -13,8 +13,10 @@ if (frozenEmotesPath.startsWith('.')) {
 }
 
 module.exports = {
-  version: '1.5.0',
+  version: '2.0.0',
   apiVersion: 4,
+  debug: process.env.EMOTE_SERVER_DEBUG === 'true',
+  useImageMagick: process.env.EMOTE_SERVER_USE_IMAGE_MAGICK === 'true',
   publicUrl: process.env.EMOTE_SERVER_PUBLIC_URL || 'http://localhost',
   port: process.env.EMOTE_SERVER_PORT || 8000,
   numberOfWorkers:

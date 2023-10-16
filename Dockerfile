@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:20-alpine
 
 ARG USER_ID=1000
 ARG GROUP_ID=1000
@@ -13,8 +13,9 @@ COPY . .
 
 RUN \
   apk --no-cache add \
-    gettext && \
-  yarn --production && \
+    gettext \
+    graphicsmagick && \
+  npm i --omit=dev && \
   chown -R ${USER_ID}:${GROUP_ID} /usr/src/app && \
   mkdir /data && chown -R ${USER_ID}:${GROUP_ID} /data
 
