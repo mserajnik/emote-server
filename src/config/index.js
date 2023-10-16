@@ -13,7 +13,7 @@ if (frozenEmotesPath.startsWith('.')) {
 }
 
 module.exports = {
-  version: '2.0.0',
+  version: '2.0.1',
   apiVersion: 4,
   debug: process.env.EMOTE_SERVER_DEBUG === 'true',
   useImageMagick: process.env.EMOTE_SERVER_USE_IMAGE_MAGICK === 'true',
